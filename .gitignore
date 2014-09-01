@@ -1,3 +1,18 @@
+# Theme should come from git clone, to enable easy version switching
+theme
+
+# Data depends on deployments (and could be located anywhere else)
+instances
+
+# Instances vary (and could be located anywhere else, alongside instances directory)
+instances.json
+
+# Tmp dir content is not part of the code
+tmp/*
+
+# Old versioning systems
+.svn/
+
 # Logs
 logs
 *.log

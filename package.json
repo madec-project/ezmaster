@@ -1,0 +1,44 @@
+{
+  "name": "castor-admin",
+  "version": "0.2.0",
+  "description": "Administration for Castor instances using the same theme",
+  "main": "app.js",
+  "scripts": {
+    "doc": "bfdocs --base-url='.' ./doc/manifest.json ./public/doc",
+    "test": "unset https_proxy && unset http_proxy && mocha",
+    "clean-test": "rm -rf instances/test instances/test.json instances/testtesttest instances/testtesttest.json",
+    "jshint": "jshint lib/ middleware/ routes/ test/ *.js *.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/castorjs/castor-admin.git"
+  },
+  "keywords": [
+    "castor",
+    "admin",
+    "management",
+    "instances"
+  ],
+  "author": "François Parmentier <francois.parmentier@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/castorjs/castor-admin/issues"
+  },
+  "homepage": "https://github.com/castorjs/castor-admin",
+  "dependencies": {
+    "LDAP": "^1.2.0",
+    "async": "^0.9.0",
+    "connect-flash": "^0.1.1",
+    "debug": "^1.0.4",
+    "ejs": "^1.0.0",
+    "express": "^3.16.8",
+    "filesize": "^2.0.3",
+    "getport": "^0.1.0",
+    "sugar": "^1.4.1",
+    "xml2js": "^0.4.4"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "request": "^2.40.0"
+  }
+}
