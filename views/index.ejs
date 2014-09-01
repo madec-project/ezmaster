@@ -467,9 +467,7 @@ $(function () {
     if ($('#create-submit-button').text() !== 'Create') {
       technicalName = $('#technicalName').val();
     }
-    console.log(users);
     var newUsers = (users[0].email ? users : null);
-    console.log('TechName : ', technicalName);
     // Send the data using post
     var posting = $.post('/instance/', {
       title: title,
@@ -486,14 +484,14 @@ $(function () {
       }
     });
     posting.fail(function (err) {
-      console.log(err.responseText);
+      console.error(err.responseText);
       var errText = err.responseText.split("\n")[0];
       if (err.status === 403 || err.status === 400) {
         errText = err.responseText;
         var op = errText.indexOf('<p>');
         var cp = errText.indexOf('</p>');
         errText = errText.substring(op + 3, cp);
-        console.log(op, cp, errText);
+        console.error(op, cp, errText);
       }
       alert(errText);
     });
@@ -517,14 +515,14 @@ $(function () {
       window.location.href = '/';
     });
     deleting.fail(function (err) {
-      console.log(err);
+      console.error(err);
       var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
       if (err.status === 403 || err.status === 400) {
         errText = err.responseText;
         var op = errText.indexOf('<p>');
         var cp = errText.indexOf('</p>');
         errText = errText.substring(op + 3, cp);
-        console.log(op, cp, errText);
+        console.error(op, cp, errText);
       }
       alert(errText);
     });
