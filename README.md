@@ -12,6 +12,12 @@ $ git clone https://github.com/castorjs/castor-admin.git
 $ npm install
 ```
 
+Optional: if you want to interact with instances using a command line, install pm2:
+
+```bash
+$ npm install -g pm2
+```
+
 ## Configuration
 
 The administration configuration is read from `./config.json`.
@@ -78,4 +84,18 @@ The `port` used by the admin server:
 ├── tmp
 ├── README.md
 └── views
+```
+
+## Contributions
+
+To test, first make sure you have development dependencies installed:
+
+```bash
+$ npm install -d
+```
+
+Then, you can launch the tests:
+
+```bash
+$ npm test
 ```
