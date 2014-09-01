@@ -3,6 +3,15 @@ castor-admin
 
 Administration for Castor instances using the same theme
 
+## Installation
+
+Prequired: nodejs, mongodb
+
+```bash
+$ git clone https://github.com/castorjs/castor-admin.git
+$ npm install
+```
+
 ## Configuration
 
 The administration configuration is read from `./config.json`.
@@ -34,14 +43,6 @@ All instances data are stored in the same `instances` directory, which path has 
 "instances_path": "/path/to/instances"
 ```
 
-### CAS server
-
-To authenticate people accessing to the admin (all authenticated people can see the admin), you need to fill in the `cas_server` key:
-
-```javascript
-"cas_server": "https://auth.domain.co"
-```
-
 ### Administrator
 
 All user ids ending with `administrator_end` may create, modify, or delete an instance.
@@ -65,11 +66,8 @@ The `port` used by the admin server:
 .
 ├── app.js
 ├── config.json
-├── doc
 ├── lib
-├── middleware
 ├── public
-│   ├── doc
 │   ├── img
 │   ├── javascripts
 │   ├── SlickGrid
@@ -77,6 +75,7 @@ The `port` used by the admin server:
 ├── routes
 ├── test
 ├── theme
+├── tmp
 ├── README.md
 └── views
 ```
