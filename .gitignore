@@ -10,6 +10,9 @@ instances.json
 # Tmp dir content is not part of the code
 tmp/*
 
+# pm2 files
+*-pm2.json
+
 # Old versioning systems
 .svn/
 
