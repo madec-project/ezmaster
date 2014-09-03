@@ -12,6 +12,7 @@ tmp/*
 
 # pm2 files
 *-pm2.json
+ecosystem.json
 
 # Old versioning systems
 .svn/
