@@ -51,7 +51,7 @@ All instances data are stored in the same `instances` directory, which path has 
 
 ### Initial PM2 configuration
 
-To make `castor-admin` work, you need to create a minimal `instances.json`, at the same level as `instances_path` (see [Configuration/Instances](#Instances)):
+To make `castor-admin` work, you need to create a minimal `instances.json`, at the same level as `instances_path` (see [Configuration/Instances](#instances)):
 
 ```json
 {
@@ -104,7 +104,7 @@ The `port` used by the admin server:
 
 ## Running
 
-Once  [Initial PM2 configuration](#Initial-PM2-configuration) is ready, you can start `castor-admin` using (path maybe relative):
+Once  [Initial PM2 configuration](#initial-pm2-configuration) is ready, you can start `castor-admin` using (path maybe relative):
 
 ```bash
 $ pm2 startOrRestart /path/to/instances.json
