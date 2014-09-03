@@ -5,7 +5,7 @@ Administration for Castor instances using the same theme
 
 ## Installation
 
-Prequired: nodejs, mongodb
+Prequired: nodejs (version 0.11.13+), mongodb (version 2+)
 
 ```bash
 $ git clone https://github.com/castorjs/castor-admin.git
