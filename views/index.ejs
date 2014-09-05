@@ -325,12 +325,13 @@ $(function () {
       grid.init();
       makeButtons(); // convert <a>s into icon buttons.
 
-      // Change status buttons
+      // Stop/start buttons and status
       var stop = function stop(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        // console.log($(this).data());
+        
         $(this)
         .attr('data-status', 'stopped')
+        .attr('title', 'Run ' + thisid)
         .click(start)
         ;
         $('.status-toggle[data-id="' + thisid + '"] .icon-pause')
@@ -340,13 +341,15 @@ $(function () {
         $('.status[data-id="' + thisid + '"]')
         .removeClass('icon-ok')
         .addClass('icon-remove')
+        .attr('title', thisid + ' stopped')
         ;
       };
       var start = function start(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        // console.log($(this).data());
+
         $(this)
         .attr('data-status', 'running')
+        .attr('title', 'Pause ' + thisid)
         .click(stop)
         ;
         $('.status-toggle[data-id="' + thisid + '"] .icon-play')
@@ -356,6 +359,7 @@ $(function () {
         $('.status[data-id="' + thisid + '"]')
         .removeClass('icon-remove')
         .addClass('icon-ok')
+        .attr('title', thisid + ' running')
         ;
       }
       $('.status-toggle[data-status="running"]').click(stop);
