@@ -85,6 +85,8 @@ require('./routes/upload')(app);
 
 require('./routes/instance')(app);
 
+require('./routes/process')(app);
+
 cleanSessionDir(null, function removeLocks(err) {
   if (err) {
     throw err;
