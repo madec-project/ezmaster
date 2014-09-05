@@ -110,6 +110,14 @@
     width: 88px;
   }
 
+  .icon-ok {
+    background-color: greenyellow;
+  }
+
+  .icon-remove {
+    background-color: bisque;
+  }
+
 </style>
 
 <!-- Create Instance Modal -->
@@ -210,7 +218,7 @@ $(function () {
     {id:"port", name:"Port", field:"port", sortable:true},
     {id:"technicalName", name:"Technical name", field:"technicalName", sortable:true},
     {id:"date", name:"Creation date", field:"date", sortable:true},
-    {id:"actions", name: "Actions", field: "actions", formatter: Slick.Formatters.ActionFormatter, width: 1}
+    {id:"actions", name: "Actions", field: "actions", formatter: Slick.Formatters.ActionFormatter/*, width: 1*/}
   ];
 
   var options = {
@@ -231,6 +239,7 @@ $(function () {
   var columnFilters = {};
   var data = [];
   var makeButtons = function makeButtons() {
+    // $('.status-toggle').button({icons: { primary: 'ui-icon-pause' }, text: false});
     $('.upload-button').button({icons: { primary: 'ui-icon-arrowthickstop-1-s' }, text: false});
     $('.modify-button').button({icons: { primary: 'ui-icon-pencil' }, text: false});
     $('.delete-button').button({icons: { primary: 'ui-icon-trash' }, text: false});    
@@ -316,6 +325,41 @@ $(function () {
       grid.init();
       makeButtons(); // convert <a>s into icon buttons.
 
+      // Change status buttons
+      var stop = function stop(e) {
+        var thisid = $(this).data().id; // e.target.dataset.id
+        // console.log($(this).data());
+        $(this)
+        .attr('data-status', 'stopped')
+        .click(start)
+        ;
+        $('.status-toggle[data-id="' + thisid + '"] .icon-pause')
+        .removeClass('icon-pause')
+        .addClass('icon-play')
+        ;
+        $('.status[data-id="' + thisid + '"]')
+        .removeClass('icon-ok')
+        .addClass('icon-remove')
+        ;
+      };
+      var start = function start(e) {
+        var thisid = $(this).data().id; // e.target.dataset.id
+        // console.log($(this).data());
+        $(this)
+        .attr('data-status', 'running')
+        .click(stop)
+        ;
+        $('.status-toggle[data-id="' + thisid + '"] .icon-play')
+        .removeClass('icon-play')
+        .addClass('icon-pause')
+        ;
+        $('.status[data-id="' + thisid + '"]')
+        .removeClass('icon-remove')
+        .addClass('icon-ok')
+        ;
+      }
+      $('.status-toggle[data-status="running"]').click(stop);
+      $('.status-toggle[data-status="stopped"]').click(start);
       // Reinitialize form depending on button (create or modify)
       $('#create-button').click(function (e) {
         $('#create-instance-form')[0].reset();
@@ -435,7 +479,7 @@ $(function () {
             'Erreur : the data server returned an error (' 
               + jqXHR.status + ' : ' + jqXHR.statusText + ')'
           );
-          console.log(jqXHR);
+          console.error(jqXHR);
         });
       });
 
@@ -446,7 +490,7 @@ $(function () {
       'Erreur : the data server returned an error (' 
         + jqXHR.status + ' : ' + jqXHR.statusText + ')'
     );
-    console.log(jqXHR);
+    console.error(jqXHR);
   });
 
 

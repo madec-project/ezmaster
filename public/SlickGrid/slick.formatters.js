@@ -26,22 +26,24 @@
   });
 
   function ActionFormatter(row, cell, value, columnDef, dataContext) {
-    var ref=dataContext.technicalName;
-    return '<a href="/upload/' + dataContext.technicalName + '"' +
-           ' class="upload-button" style="font-size:50%">Déposer dans l\'instance « ' +
-            dataContext.technicalName +
-           ' »</a> ' +
-           '<a href="#createModal"' +
-           ' data-toggle="modal" data-id="' + dataContext.technicalName + '"' +
-           ' class="modify-button" style="font-size:50%">Modifier l\'instance « ' +
-            dataContext.technicalName +
-           ' »</a> ' +
-           '<a  href="#deleteModal"' +
-           ' data-toggle="modal" data-id="' + dataContext.technicalName + '"' +
-           ' class="delete-button" style="font-size:50%">Supprimer l\'instance « ' +
-            dataContext.technicalName +
-           ' »</a> '
-           ;
+    var ref = dataContext.technicalName;
+    return  '<i class="status icon-ok" data-id="' + ref + '" title="' + ref + ' running"></i> ' +
+            '<a class="status-toggle btn btn-mini" data-id="' + ref + '" data-status="running" title="Pause ' + ref + '"><i class="icon-pause"></i></a> ' +
+            '<a href="/upload/' + ref + '"' +
+            ' class="upload-button" style="font-size:50%">Upload to instance "' +
+            ref +
+            '"</a> ' +
+            '<a href="#createModal"' +
+            ' data-toggle="modal" data-id="' + ref + '"' +
+            ' class="modify-button" style="font-size:50%">Modify instance "' +
+            ref +
+            '"</a> ' +
+            '<a  href="#deleteModal"' +
+            ' data-toggle="modal" data-id="' + ref + '"' +
+            ' class="delete-button" style="font-size:50%">Remove instance "' +
+            ref +
+            '"</a> '
+            ;
   }
   // function UploadFormatter(row, cell, value, columnDef, dataContext) {
   //   return '<a href="/upload/' + dataContext.technicalName +
