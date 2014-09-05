@@ -27,8 +27,8 @@
 
   function ActionFormatter(row, cell, value, columnDef, dataContext) {
     var ref = dataContext.technicalName;
-    return  '<i class="status icon-ok" data-id="' + ref + '" title="' + ref + ' running"></i> ' +
-            '<a class="status-toggle btn btn-mini" data-id="' + ref + '" data-status="running" title="Pause ' + ref + '"><i class="icon-pause"></i></a> ' +
+    return  '<i class="status icon-remove" data-id="' + ref + '" title="' + ref + ' stopped"></i> ' +
+            '<a class="status-toggle btn btn-mini" data-id="' + ref + '" data-status="stopped" title="Run ' + ref + '"><i class="icon-play"></i></a> ' +
             '<a href="/upload/' + ref + '"' +
             ' class="upload-button" style="font-size:50%">Upload to instance "' +
             ref +

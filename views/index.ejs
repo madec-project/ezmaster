@@ -266,6 +266,14 @@ $(function () {
     return true;
   }
 
+  // Get running PM2 processes
+  var config = <%- config %>;
+  var runningInstances = config.processes.apps.reduce(function addName(alreadyKnown, app){
+    alreadyKnown.push(app.name);
+    return alreadyKnown;
+  }, []);
+
+  //////////////////////////////
   $.ajax({
     url: "/instance/list.json?updatable=true"
   })
@@ -325,42 +333,63 @@ $(function () {
       grid.init();
       makeButtons(); // convert <a>s into icon buttons.
 
+      /**
+       * Change the status of an instance depending whether it is running or not
+       * @param  {String}  id      Identifier of the instance
+       * @param  {Boolean} running true if running
+       */
+      var displayStatus = function (id, running) {
+        if (running) {
+          $('.status-toggle[data-id="' + id + '"] i')
+          .removeClass('icon-play')
+          .addClass('icon-pause')
+          ;
+          $('.status[data-id="' + id + '"]')
+          .removeClass('icon-remove')
+          .addClass('icon-ok')
+          .attr('title', id + ' running')
+          ;
+          $('.status-toggle[data-id="' + id + '"]')
+          .attr('data-status', 'running')
+          .attr('title', 'Pause ' + id)
+          .click(stop)
+          ;
+        }
+        else {
+          $('.status-toggle[data-id="' + id + '"] i')
+          .removeClass('icon-pause')
+          .addClass('icon-play')
+          ;
+          $('.status[data-id="' + id + '"]')
+          .removeClass('icon-ok')
+          .addClass('icon-remove')
+          .attr('title', id + ' stopped')
+          ;
+          $('.status-toggle[data-id="' + id + '"]')
+          .attr('data-status', 'stopped')
+          .attr('title', 'Run ' + id)
+          .click(start)
+          ;
+        }
+      };
+      // Initialize statuses
+      data.forEach(function (instance) {
+        var id = instance.technicalName;
+        if (runningInstances.indexOf(id) !== -1) {
+          displayStatus(id, true);
+        }
+      })
+
       // Stop/start buttons and status
       var stop = function stop(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        
-        $(this)
-        .attr('data-status', 'stopped')
-        .attr('title', 'Run ' + thisid)
-        .click(start)
-        ;
-        $('.status-toggle[data-id="' + thisid + '"] .icon-pause')
-        .removeClass('icon-pause')
-        .addClass('icon-play')
-        ;
-        $('.status[data-id="' + thisid + '"]')
-        .removeClass('icon-ok')
-        .addClass('icon-remove')
-        .attr('title', thisid + ' stopped')
-        ;
+        // TODO: really stop the process
+        displayStatus(thisid, false);
       };
       var start = function start(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-
-        $(this)
-        .attr('data-status', 'running')
-        .attr('title', 'Pause ' + thisid)
-        .click(stop)
-        ;
-        $('.status-toggle[data-id="' + thisid + '"] .icon-play')
-        .removeClass('icon-play')
-        .addClass('icon-pause')
-        ;
-        $('.status[data-id="' + thisid + '"]')
-        .removeClass('icon-remove')
-        .addClass('icon-ok')
-        .attr('title', thisid + ' running')
-        ;
+        // TODO: really start the process
+        displayStatus(thisid, true);
       }
       $('.status-toggle[data-status="running"]').click(stop);
       $('.status-toggle[data-status="stopped"]').click(start);

@@ -1,8 +1,10 @@
 /*jshint node:true, laxcomma:true */
 "use strict";
 
-var config = require('../config');
-var getInstancesConfig = require('../lib/instances.js').getInstancesConfig;
+var config             = require('../config');
+var getInstancesConfig = require('../lib/instances').getInstancesConfig;
+var loadJson           = require('../lib/processes').loadJson;
+var getPM2JsonPath     = require('../lib/processes').getJsonPath;
 
 /*
  * GET home page.
@@ -13,9 +15,10 @@ exports.index = function (req, res) {
     req.user =  "admin@castorjs.org";
   }
   config.instances = getInstancesConfig();
+  config.processes = loadJson(getPM2JsonPath());
   res.render('index',
     { title: 'Accueil'
     , path: '/'
     , userName: req.user
-    , config: config });
+    , config: JSON.stringify(config) });
 };
