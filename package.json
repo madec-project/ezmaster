@@ -28,6 +28,7 @@
   "dependencies": {
     "LDAP": "^1.2.0",
     "async": "^0.9.0",
+    "castor-cli": "0.0.2",
     "connect-flash": "^0.1.1",
     "debug": "^1.0.4",
     "ejs": "^1.0.0",
