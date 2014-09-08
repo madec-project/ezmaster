@@ -340,36 +340,18 @@ $(function () {
        */
       var displayStatus = function (id, running) {
         if (running) {
-          $('.status-toggle[data-id="' + id + '"] i')
-          .removeClass('icon-play')
-          .addClass('icon-pause')
-          ;
-          $('.status[data-id="' + id + '"]')
-          .removeClass('icon-remove')
-          .addClass('icon-ok')
-          .attr('title', id + ' running')
-          ;
-          $('.status-toggle[data-id="' + id + '"]')
-          .attr('data-status', 'running')
-          .attr('title', 'Pause ' + id)
-          .click(stop)
-          ;
+          $('.status-toggle[data-id="' + id + '"][data-status="stopped"]').hide();
+          $('.status-toggle[data-id="' + id + '"][data-status="running"]').show();
+
+          $('.status[data-id="' + id + '"].icon-remove').hide();
+          $('.status[data-id="' + id + '"].icon-ok').show();
         }
         else {
-          $('.status-toggle[data-id="' + id + '"] i')
-          .removeClass('icon-pause')
-          .addClass('icon-play')
-          ;
-          $('.status[data-id="' + id + '"]')
-          .removeClass('icon-ok')
-          .addClass('icon-remove')
-          .attr('title', id + ' stopped')
-          ;
-          $('.status-toggle[data-id="' + id + '"]')
-          .attr('data-status', 'stopped')
-          .attr('title', 'Run ' + id)
-          .click(start)
-          ;
+          $('.status-toggle[data-id="' + id + '"][data-status="running"]').hide();
+          $('.status-toggle[data-id="' + id + '"][data-status="stopped"]').show(); 
+
+          $('.status[data-id="' + id + '"].icon-ok').hide();
+          $('.status[data-id="' + id + '"].icon-remove').show();
         }
       };
       // Initialize statuses
@@ -383,13 +365,53 @@ $(function () {
       // Stop/start buttons and status
       var stop = function stop(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        // TODO: really stop the process
-        displayStatus(thisid, false);
+        // stop the process
+        var deleting = $.ajax({
+          url: '/process/' + thisid,
+          type: 'DELETE'
+        });
+        // Action done
+        deleting.done(function (data) {
+          // success: change the status of the instance
+          displayStatus(thisid, false);
+        });
+        deleting.fail(function (err) {
+          console.error(err);
+          var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
+          if (err.status === 403 || err.status === 400) {
+            errText = err.responseText;
+            var op = errText.indexOf('<p>');
+            var cp = errText.indexOf('</p>');
+            errText = errText.substring(op + 3, cp);
+            console.error(op, cp, errText);
+          }
+          alert(errText);
+        });
       };
       var start = function start(e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        // TODO: really start the process
-        displayStatus(thisid, true);
+        // really start the process
+        var putting = $.ajax({
+          url: '/process/' + thisid,
+          type: 'PUT'
+        });
+        // Action done
+        putting.done(function (data) {
+          // success: change the status of the instance
+          displayStatus(thisid, true);
+        });
+        putting.fail(function (err) {
+          console.error(err);
+          var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
+          if (err.status === 403 || err.status === 400) {
+            errText = err.responseText;
+            var op = errText.indexOf('<p>');
+            var cp = errText.indexOf('</p>');
+            errText = errText.substring(op + 3, cp);
+            console.error(op, cp, errText);
+          }
+          alert(errText);
+        });
       }
       $('.status-toggle[data-status="running"]').click(stop);
       $('.status-toggle[data-status="stopped"]').click(start);
@@ -581,7 +603,7 @@ $(function () {
     // Get the form data
     var $form = $(this),
         id = $("#deleteModalId").text();
-    // Send the data using post
+    // Send the data using delete
     var deleting = $.ajax({
       url: '/instance/' + id,
       type: 'DELETE'
