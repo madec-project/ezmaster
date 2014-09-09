@@ -24,6 +24,13 @@
 <script type="text/javascript" src="/SlickGrid/plugins/slick.headerbuttons.js"></script>
 <script type="text/javascript" src="/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/stylesheets/jsoneditor.min.css">
+<script type="text/javascript" src="javascripts/jsoneditor.min.js"></script>
+<script type="text/javascript" src="javascripts/require.js"></script>
+<script type="text/javascript" src="javascripts/ace/ace.js"></script>
+<script type="text/javascript" src="javascripts/ace/theme-jsoneditor.js"></script>
+
+
 <h1>Instances</h1>
 
 
@@ -118,6 +125,10 @@
     background-color: bisque;
   }
 
+  .editor {
+    height: 100%;
+  }
+
 </style>
 
 <!-- Create Instance Modal -->
@@ -210,6 +221,10 @@
   </form>
 </div>
 
+<!-- JSON Editor -->
+<div id="settingsEditor" class="editor" style="display:none">
+</div>
+
 <script type="text/javascript">
 $(function () {
   // Initialize SlickGrid (instances list)
@@ -239,7 +254,6 @@ $(function () {
   var columnFilters = {};
   var data = [];
   var makeButtons = function makeButtons() {
-    // $('.status-toggle').button({icons: { primary: 'ui-icon-pause' }, text: false});
     $('.upload-button').button({icons: { primary: 'ui-icon-arrowthickstop-1-s' }, text: false});
     $('.modify-button').button({icons: { primary: 'ui-icon-pencil' }, text: false});
     $('.delete-button').button({icons: { primary: 'ui-icon-trash' }, text: false});    
@@ -331,8 +345,28 @@ $(function () {
       });
 
       grid.init();
-      makeButtons(); // convert <a>s into icon buttons.
+      makeButtons(); // convert <a>s into JQuery-UI icon buttons.
 
+
+      // Settings //
+      var jseOptions = {
+        name: "No instance selected",
+        mode: "tree"       // tree (default), view, form, text, code
+      };
+      var edContainer = document.getElementById('settingsEditor');
+      var editor = new JSONEditor(container,jseOptions);
+
+      $('.settings').click(function (e) {
+        "use strict";
+        var id = $(this).data().id
+        // console.info('settings ' + id);
+        // Instances settings are in var list.
+        editor.set(list[id]);
+        editor.setName(id);
+        $('#settingsEditor').toggle();
+      });
+
+      // Statuses //
       /**
        * Change the status of an instance depending whether it is running or not
        * @param  {String}  id      Identifier of the instance

@@ -33,15 +33,19 @@
             '<i class="status icon-ok" data-id="' + ref + '" title="' + ref + ' running" style="display:none"></i> ' +
             '<a class="status-toggle btn btn-mini" data-id="' + ref + '" data-status="running" title="Stop ' + ref + '" style="display:none"><i class="icon-pause"></i></a> ' +
 
+            '<a class="settings btn btn-mini" data-id="' + ref + '" title="Edit settings of ' + ref + '"><i class="icon-wrench"></i></a>' +
+
             '<a href="/upload/' + ref + '"' +
             ' class="upload-button" style="font-size:50%">Upload to instance "' +
             ref +
             '"</a> ' +
+
             '<a href="#createModal"' +
             ' data-toggle="modal" data-id="' + ref + '"' +
             ' class="modify-button" style="font-size:50%">Modify instance "' +
             ref +
             '"</a> ' +
+
             '<a  href="#deleteModal"' +
             ' data-toggle="modal" data-id="' + ref + '"' +
             ' class="delete-button" style="font-size:50%">Remove instance "' +
