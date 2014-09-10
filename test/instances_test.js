@@ -144,7 +144,7 @@ describe('Instances', function () {
         var instance_conf = require('../instances/testtesttest.json');
         debug('instance_conf', util.inspect(instance_conf,true));
         assert.equal(instance_conf.title, 'Instance pour tester les fiches d instances (201)');
-        assert(instance_conf.upload_path.endsWith(
+        assert(instance_conf.data_path.endsWith(
           '/instances/testtesttest'));
         assert.equal(instance_conf.users[0].email, 'chuck@nor.ris');
         assert.equal(instance_conf.users[0].role, 'uploader');
@@ -328,7 +328,7 @@ describe('Instances', function () {
           "email": "chuck@nor.ris",
           "role": "uploader"
         });
-        assert(conf.upload_path.endsWith("instances/testtesttest"));
+        assert(conf.data_path.endsWith("instances/testtesttest"));
         assert(conf.port >= 35000);
         done(err);
       });
@@ -415,7 +415,7 @@ describe('Instances', function () {
       var instance_conf = require('../instances/testtesttest.json');
       assert.equal(instance_conf.title, 'Instance pour tester les fiches d instances (201)');
       assert(instance_conf.port >= 35000);
-      assert(instance_conf.upload_path.endsWith(
+      assert(instance_conf.data_path.endsWith(
         '/instances/testtesttest'));
       assert.equal(instance_conf.users[2].email, 'manager@castorjs.org');
       assert.equal(instance_conf.users[2].role, 'manager');
