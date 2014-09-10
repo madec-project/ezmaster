@@ -5,22 +5,22 @@
 // Tests for upload
 
 // Required libraries
-var assert = require('assert');
-var fs = require('fs');
-var path = require('path');
-var request = require('request');
+var debug      = require('debug')('castor:admin:upload:test');
+var assert     = require('assert');
+var fs         = require('fs');
+var path       = require('path');
+var request    = require('request');
 var isSameFile = require('./helpers/is-same-file');
-var config = require('../config');
-var debug = require('debug')('castor:admin:upload:test');
+var config     = require('../config');
 
 // Files to use
 var noticesFilePath = 'test/dataset/12_10_notices_instance_test.5.rdf';
 var expectedFilePath = noticesFilePath;
-var copiedFilePath = path.resolve(__dirname, '..', config.instances_path,
+var copiedFilePath = path.resolve(__dirname, '..', 'instances',
   'test/12_10_notices_instance_test.5.rdf');
 var originalTestInstancePath = 'test/dataset/instances/test';
 var originalTestInstanceConfigPath = originalTestInstancePath + '.json';
-var testInstancePath = path.resolve(__dirname, '..', config.instances_path, 'test');
+var testInstancePath = path.resolve(__dirname, '..', 'instances', 'test');
 var testInstanceConfigPath = testInstancePath + '.json';
 
 // Let's test
