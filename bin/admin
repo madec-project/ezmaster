@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+'use strict';
+var http = require('http');
+var path = require('path');
+var conf = require('../config.js');
+
+require('../app.js')(function(app) {
+  http.createServer(app).listen(conf.get('port'), function () {
+    console.log("Express server listening on port " + conf.get('port'));
+    console.log("Instances will be in  " + conf.get('instances_path'));
+  });
+});
