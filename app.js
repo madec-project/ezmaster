@@ -10,7 +10,6 @@ var express = require('express')
   , flash = require('connect-flash')
   , http = require('http')
   , path = require('path')
-  , config = require('./config')
   , Errors = require('./lib/errors')
   , debug = require('debug')('castor:admin:app')
   , cleanSessionDir = require('./lib/session').cleanSessionDir
@@ -21,7 +20,6 @@ var express = require('express')
 var app = express();
 
 app.configure(function () {
-  app.set('port', config.port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.favicon());
@@ -87,16 +85,16 @@ require('./routes/instance')(app);
 
 require('./routes/process')(app);
 
-cleanSessionDir(null, function removeLocks(err) {
-  if (err) {
-    throw err;
-  }
-  removeConfigLockFiles(function launchServer(err) {
+module.exports = function(cb) {
+  cleanSessionDir(null, function removeLocks(err) {
     if (err) {
       throw err;
     }
-    http.createServer(app).listen(app.get('port'), function () {
-      console.log("Express server listening on port " + app.get('port'));
+    removeConfigLockFiles(function launchServer(err) {
+      if (err) {
+        throw err;
+      }
+      cb(app);
     });
   });
-});
+ }
