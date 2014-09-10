@@ -1,9 +1,10 @@
+/*jshint node:true*/
 'use strict';
 var path = require('path');
 
 function Configuration() {
     this.port =  process.env.PORT || 35267;
-    this.instances_path = path.normalize(path.resolve(process.env.HOME || process.cwd(), "instances"));
+    this.instances_path = path.resolve(process.env.HOME || process.cwd(), "instances");
     this.administrator_end =  "castorjs.org";
 }
 

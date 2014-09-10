@@ -18,11 +18,11 @@ Optional: if you want to interact with instances using a command line, install p
 $ npm install -g pm2
 ```
 
-## Configuration
+## Configuration FIXME
 
 The administration configuration is read from `./config.json`.
 
-### Theme
+### Theme FIXME
 
 The managed instances of CASTOR must use the same theme, which is located in  `./theme`.
 Therefore, you can `git clone` any theme here:
@@ -43,11 +43,13 @@ $ cd -
 
 Instances are differentiated only by their data, and their settings.
 
-All instances data are stored in the same `instances` directory, which path has to be given in `config.json`:
+All instances data are stored in the same `instances` directory, which path has to be given to `castor-admin`:
 
-```javascript
-"instances_path": "/path/to/instances"
+```basg
+$ castor-admin /path/to/instances
 ```
+
+By default, instances are put into `$HOME/instances`.
 
 ### Initial PM2 configuration
 
@@ -96,7 +98,6 @@ The `port` used by the admin server:
 │   └── stylesheets
 ├── routes
 ├── test
-├── theme
 ├── tmp
 ├── README.md
 └── views
@@ -104,10 +105,16 @@ The `port` used by the admin server:
 
 ## Running
 
+TODELETE
 Once  [Initial PM2 configuration](#initial-pm2-configuration) is ready, you can start `castor-admin` using (path maybe relative):
 
 ```bash
 $ pm2 startOrRestart /path/to/instances.json
+```
+ENDTODELETE
+
+```bash
+$ castor-admin [/path/to/instances/]
 ```
 
 ## Contributions
@@ -116,6 +123,12 @@ To test, first make sure you have development dependencies installed:
 
 ```bash
 $ npm install -d
+```
+
+Next, run the admin:
+
+```bash
+$ ./bin/admin
 ```
 
 Then, you can launch the tests:
