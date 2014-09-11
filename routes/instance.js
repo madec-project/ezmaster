@@ -25,6 +25,10 @@ module.exports = function (server) {
   server.get('/instance/:id'/*, cas.casauth({root: config.cas_server})*/, instances.getRecord);
 
   /////////////////////////////////////////////////////////////////////////////
+  // put /instance/:id
+  server.put('/instance/:id', instances.routePutRecord);
+
+  /////////////////////////////////////////////////////////////////////////////
   // GET /instance/:id/volume.json
   server.get('/instance/:id/volume.json'/*, cas.casauth({root: config.cas_server})*/, instances.getVolume);
 

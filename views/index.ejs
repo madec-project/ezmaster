@@ -364,18 +364,20 @@ $(function () {
 
       // Stop/start buttons and status
       var stop = function stop(e) {
-        var thisid = $(this).data().id; // e.target.dataset.id
-        // stop the process
-        var deleting = $.ajax({
-          url: '/process/' + thisid,
-          type: 'DELETE'
+        var id          = $(this).data().id;
+        var json        = list[id];
+        json.turnoffAll = true;
+        var putting = $.ajax({
+          url: '/instance/' + id,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(json)
         });
         // Action done
-        deleting.done(function (data) {
-          // success: change the status of the instance
-          displayStatus(thisid, false);
-        });
-        deleting.fail(function (err) {
+        putting.done(function (data) {
+          displayStatus(id, false);
+        })
+        putting.fail(function (err) {
           console.error(err);
           var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
           if (err.status === 403 || err.status === 400) {
@@ -389,17 +391,19 @@ $(function () {
         });
       };
       var start = function start(e) {
-        var thisid = $(this).data().id; // e.target.dataset.id
-        // really start the process
+        var id          = $(this).data().id;
+        var json        = list[id];
+        json.turnoffAll = false;
         var putting = $.ajax({
-          url: '/process/' + thisid,
-          type: 'PUT'
+          url: '/instance/' + id,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(json)
         });
         // Action done
         putting.done(function (data) {
-          // success: change the status of the instance
-          displayStatus(thisid, true);
-        });
+          displayStatus(id, true);
+        })
         putting.fail(function (err) {
           console.error(err);
           var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
@@ -412,7 +416,7 @@ $(function () {
           }
           alert(errText);
         });
-      }
+      };
       $('.status-toggle[data-status="running"]').click(stop);
       $('.status-toggle[data-status="stopped"]').click(start);
       // Reinitialize form depending on button (create or modify)
