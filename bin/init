@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+/*jshint node:true*/
+// Initialize environment just after castor-admin installation.
+// Create an 'instances' directory, and initialize an 'instances.json'
+// at the same level.
+'use strict';
+
+var debug               = require('debug')('castor:admin:bin');
+var fs                  = require('fs');
+var instances_path      = require('config.js').instances_path;
+var instances_json_path = instances_path + '.json';
+
+var adminPM2 =
+{
+  "apps": [
+    {
+      "name": "admin",
+      "script": "castor-admin",
+      "cwd": process.cwd(),
+      "node_args": [],
+      "exec_mode": "fork_mode",
+      "exec_interpreter": "node"
+    }
+  ]
+};
+
+fs.mkdir(instances_path);
+fs.writeFile(instances_json_path, JSON.stringify(adminPM2, null, ' '));

@@ -11,7 +11,8 @@
     "doc": "bfdocs --base-url='.' ./doc/manifest.json ./public/doc",
     "test": "unset https_proxy && unset http_proxy && mocha",
     "clean-test": "rm -rf instances/test instances/test.json instances/testtesttest instances/testtesttest.json",
-    "jshint": "jshint lib/ routes/ test/ *.js *.json"
+    "jshint": "jshint bin/ lib/ routes/ test/ *.js *.json",
+    "postinstall": "node ./bin/init"
   },
   "repository": {
     "type": "git",
