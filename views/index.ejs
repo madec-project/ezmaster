@@ -266,12 +266,8 @@ $(function () {
     return true;
   }
 
-  // Get running PM2 processes
+  // Get instances
   var config = <%- config %>;
-  var runningInstances = config.processes.apps.reduce(function addName(alreadyKnown, app){
-    alreadyKnown.push(app.name);
-    return alreadyKnown;
-  }, []);
 
   //////////////////////////////
   $.ajax({
@@ -357,9 +353,7 @@ $(function () {
       // Initialize statuses
       data.forEach(function (instance) {
         var id = instance.technicalName;
-        if (runningInstances.indexOf(id) !== -1) {
-          displayStatus(id, true);
-        }
+        displayStatus(id, !(list[id].turnoffAll));
       })
 
       // Stop/start buttons and status
