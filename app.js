@@ -5,17 +5,17 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , flash = require('connect-flash')
-  , http = require('http')
-  , path = require('path')
-  , Errors = require('./lib/errors')
-  , debug = require('debug')('castor:admin:app')
-  , cleanSessionDir = require('./lib/session').cleanSessionDir
-  , removeConfigLockFiles = require('./lib/instances').removeConfigLockFiles
-  // , cas = require('./middleware/casauth.js')
-  ;
+var debug                 = require('debug')('castor:admin:app');
+var express               = require('express');
+var flash                 = require('connect-flash');
+var http                  = require('http');
+var path                  = require('path');
+var routes                = require('./routes');
+var Errors                = require('./lib/errors');
+var cleanSessionDir       = require('./lib/session').cleanSessionDir;
+var removeConfigLockFiles = require('./lib/instances').removeConfigLockFiles;
+// var cas = require('./middleware/casauth.js');
+
 
 var app = express();
 
@@ -97,4 +97,4 @@ module.exports = function(cb) {
       cb(app);
     });
   });
- }
+};

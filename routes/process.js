@@ -2,7 +2,6 @@
 'use strict';
 
 var debug     = require('debug')('castor:admin:processes');
-var config    = require('../config');
 var processes = require('../lib/processes.js');
 
 module.exports = function (server) {
