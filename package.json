@@ -30,7 +30,6 @@
   },
   "homepage": "https://github.com/castorjs/castor-admin",
   "dependencies": {
-    "LDAP": "^1.2.0",
     "async": "^0.9.0",
     "connect-flash": "^0.1.1",
     "debug": "^1.0.4",
