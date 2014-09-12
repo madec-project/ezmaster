@@ -7,7 +7,7 @@
 
 var debug               = require('debug')('castor:admin:bin');
 var fs                  = require('fs');
-var instances_path      = require('config.js').instances_path;
+var instances_path      = require('../config.js').instances_path;
 var instances_json_path = instances_path + '.json';
 
 var adminPM2 =
@@ -23,6 +23,7 @@ var adminPM2 =
     }
   ]
 };
-
-fs.mkdir(instances_path);
-fs.writeFile(instances_json_path, JSON.stringify(adminPM2, null, ' '));
+if (!fs.existsSync(instances_path)) {
+	fs.mkdir(instances_path);
+	fs.writeFile(instances_json_path, JSON.stringify(adminPM2, null, ' '));
+}
