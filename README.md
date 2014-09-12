@@ -10,6 +10,7 @@ Prequired: nodejs (version 0.11.13+), mongodb (version 2+)
 ```bash
 $ git clone https://github.com/castorjs/castor-admin.git
 $ npm install
+$ npm install -g castor-cli
 ```
 
 Optional: if you want to interact with instances using a command line, install pm2:
