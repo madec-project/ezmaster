@@ -8,7 +8,7 @@ var conf  = require('../config.js');
 
 debug(process.argv);
 if (process.argv.length > 2) {
-  conf.set('instances_path', process.argv.pop());
+  conf.set('instances_path', path.resolve(process.argv.pop()));
 }
 
 require('../app.js')(function(app) {
