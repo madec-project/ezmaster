@@ -19,25 +19,21 @@ Optional: if you want to interact with instances using a command line, install p
 $ npm install -g pm2
 ```
 
-## Configuration FIXME
+## Configuration
 
-The administration configuration is read from `./config.json`.
+### Theme
 
-### Theme FIXME
-
-The managed instances of CASTOR must use the same theme, which is located in  `./theme`.
-Therefore, you can `git clone` any theme here:
+Install all the themes you want to usable in an instance through `npm`,
+using github:
 
 ```bash
-$ git clone https://github.com/castorjs/castor-theme-dashboard.git theme
+$ npm install -g https://github.com/castorjs/castor-theme-dashboard.git
 ```
 
-Then, you can update, or change version, simply using git tags.
+or using only `npm`:
 
 ```bash
-$ cd theme
-$ git checkout 3.14.16
-$ cd -
+$ npm install castor-theme-dashboard
 ```
 
 ### Instances
@@ -52,22 +48,6 @@ $ castor-admin /path/to/instances
 
 By default, instances are put into `$HOME/instances`.
 
-### Initial PM2 configuration
-
-To make `castor-admin` work, you need to create a minimal `instances.json`, at the same level as `instances_path` (see [Configuration/Instances](#instances)):
-
-```json
-{
-  "apps" : [{
-    "script":"app.js",
-    "name":"admin",
-    "node_args":[],
-    "exec_mode":"fork_mode",
-    "exec_interpreter":"node"
-  }]
-}
-```
-
 ### Administrator
 
 All user ids ending with `administrator_end` may create, modify, or delete an instance.
@@ -75,6 +55,9 @@ All user ids ending with `administrator_end` may create, modify, or delete an in
 ```javascript
 "administrator_end": "domain.co"
 ```
+
+NOTE: at the moment, no authentication is used. This `administrator_end` is
+almost meaningless.
 
 ### Port
 
@@ -84,14 +67,14 @@ The `port` used by the admin server:
 "port": 35267
 ```
 
-
 ## Files tree
 
 ```
 .
 ├── app.js
-├── config.json
+├── config.js
 ├── lib
+├── package.json
 ├── public
 │   ├── img
 │   ├── javascripts
@@ -106,16 +89,14 @@ The `port` used by the admin server:
 
 ## Running
 
-TODELETE
-Once  [Initial PM2 configuration](#initial-pm2-configuration) is ready, you can start `castor-admin` using (path maybe relative):
+```bash
+$ castor-admin [/path/to/instances/]
+```
+
+or you can manually start the admin and all the instances with:
 
 ```bash
 $ pm2 startOrRestart /path/to/instances.json
-```
-ENDTODELETE
-
-```bash
-$ castor-admin [/path/to/instances/]
 ```
 
 ## Contributions
