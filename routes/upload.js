@@ -1,14 +1,14 @@
 /*jslint node:true, maxlen:150, maxerr:50, indent:2, laxcomma:true, white:true  */
 'use strict';
 
-var sugar = require('sugar');
+var debug  = require('debug')('castor:admin:upload');
+var sugar  = require('sugar');
 var config = require('../config');
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
+var http   = require('http');
+var path   = require('path');
+var util   = require('util');
+var mv     = require('mv');
 // var cas = require('../middleware/casauth');
-var util = require('util');
-var debug = require('debug')('castor:admin:upload');
 var getInstancesConfig = require('../lib/instances.js').getInstancesConfig;
 var getUpdatableInstances = require('../lib/instances.js').getUpdatableInstances;
 
@@ -87,13 +87,14 @@ module.exports = function (server) {
         );
       debug('req.files.notices.path',req.files.notices.path);
       debug('target_path',target_path);
-      fs.rename(req.files.notices.path, target_path, function (err) {
+      mv(req.files.notices.path, target_path, function (err) {
         if (!err) {
           var message = 'The file "' + req.files.notices.name +
                         '" has been uploaded.';
           req.flash('success', message);
         }
         else {
+          debug(err);
           // Flash messages
           if (typeof err === 'object') {
             err = err.message;
