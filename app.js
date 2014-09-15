@@ -10,6 +10,7 @@ var express               = require('express');
 var flash                 = require('connect-flash');
 var http                  = require('http');
 var path                  = require('path');
+var os                    = require('os');
 var routes                = require('./routes');
 var Errors                = require('./lib/errors');
 var cleanSessionDir       = require('./lib/session').cleanSessionDir;
@@ -24,7 +25,7 @@ app.configure(function () {
   app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.bodyParser({uploadDir: __dirname + '../../../../tmp'}));
+  app.use(express.bodyParser({uploadDir: os.tmpdir()}));
   app.use(express.methodOverride());
 
   app.use(express.cookieParser('keyboard cat'));
