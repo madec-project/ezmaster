@@ -9,6 +9,7 @@ Prequired: nodejs (version 0.11.13+), mongodb (version 2+)
 
 ```bash
 $ git clone https://github.com/castorjs/castor-admin.git
+$ cd castor-admin
 $ npm install
 $ npm install -g castor-cli
 ```
@@ -30,10 +31,10 @@ using github:
 $ npm install -g https://github.com/castorjs/castor-theme-dashboard.git
 ```
 
-or using only `npm`:
+or using only `npm` (if the theme is published):
 
 ```bash
-$ npm install castor-theme-dashboard
+$ npm install -g castor-theme-dashboard
 ```
 
 ### Instances
