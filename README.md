@@ -37,6 +37,12 @@ or using only `npm` (if the theme is published):
 $ npm install -g castor-theme-dashboard
 ```
 
+To set the default theme that castor-admin will use, set the environment variable `THEME` to the name of the theme (in `.bashrc` or `.profile`).
+
+```bash
+export THEME=castor-theme-dashboard
+```
+
 ### Instances
 
 Instances are differentiated only by their data, and their settings.

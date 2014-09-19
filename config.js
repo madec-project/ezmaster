@@ -6,6 +6,7 @@ function Configuration() {
     this.port =  process.env.PORT || 35267;
     this.instances_path = path.resolve(process.env.HOME || process.cwd(), "instances");
     this.administrator_end =  "castorjs.org";
+    this.theme = process.env.THEME || 'default';
 }
 
 Configuration.prototype.set = function set(name, value) {
