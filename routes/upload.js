@@ -3,6 +3,7 @@
 
 var debug  = require('debug')('castor:admin:upload');
 var sugar  = require('sugar');
+var async  = require('async');
 var config = require('../config');
 var http   = require('http');
 var path   = require('path');
@@ -81,20 +82,26 @@ module.exports = function (server) {
 
       // move to the instance directory
       var upload_path = path.resolve(__dirname, '..', config.instances_path, instance);
-      var target_path = path.join(
+      var notices = req.files.notices;
+      if (!util.isArray(notices)) {
+        notices = [notices];
+      }
+      async.map(notices, function mvFile(notice, cb) {
+        var target_path = path.join(
           upload_path + '/',
-          path.basename(req.files.notices.name)
+          path.basename(notice.name)
         );
-      debug('req.files.notices.path',req.files.notices.path);
-      debug('target_path',target_path);
-      mv(req.files.notices.path, target_path, function (err) {
-        if (!err) {
-          var message = 'The file "' + req.files.notices.name +
-                        '" has been uploaded.';
-          req.flash('success', message);
-        }
-        else {
-          debug(err);
+        mv(notice.path, target_path, function afterMv(err) {
+          if (!err) {
+            var message = 'The file "' + notice.name +
+                          '" has been uploaded. ';
+            req.flash('success', message);
+          }
+          cb(err);
+        });
+      }, function errorInMv(err, results) {
+        debug(err);
+        if (err) {
           // Flash messages
           if (typeof err === 'object') {
             err = err.message;
