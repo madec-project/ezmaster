@@ -115,7 +115,7 @@ export ITEMS_PER_PAGE=30
 $ castor-admin [/path/to/instances/]
 ```
 
-or you can manually start the admin and all the instances with:
+and you can manually start all the instances with:
 
 ```bash
 $ pm2 startOrRestart /path/to/instances.json
