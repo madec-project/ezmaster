@@ -1,6 +1,6 @@
 {
   "name": "castor-admin",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Administration for Castor instances using the same theme",
   "main": "app.js",
   "bin": {
