@@ -74,6 +74,21 @@ The `port` used by the admin server:
 "port": 35267
 ```
 
+To set the port that castor-admin will use, set the environment variable `PORT` (in `.bashrc` or `.profile`). Default value: 35267.
+
+```bash
+export PORT=3000
+```
+
+### Items per page
+
+To change the default value of the items number per page, set the environment variable `ITEMS_PER_PAGE` (in `.bashrc` or `.profile`). Default value: 30.
+
+```bash
+export ITEMS_PER_PAGE=30
+```
+
+
 ## Files tree
 
 ```

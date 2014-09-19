@@ -13,14 +13,14 @@ var instances_json_path = instances_path + '.json';
 var adminPM2 =
 {
   "apps": [
-    {
-      "name": "admin",
-      "script": "castor-admin",
-      "cwd": process.cwd(),
-      "node_args": [],
-      "exec_mode": "fork_mode",
-      "exec_interpreter": "node"
-    }
+    // {
+    //   "name": "admin",
+    //   "script": "castor-admin",
+    //   "cwd": process.cwd(),
+    //   "node_args": [],
+    //   "exec_mode": "fork_mode",
+    //   "exec_interpreter": "node"
+    // }
   ]
 };
 if (!fs.existsSync(instances_path)) {
