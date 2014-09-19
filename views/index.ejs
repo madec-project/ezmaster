@@ -212,10 +212,13 @@
 
 <script type="text/javascript">
 $(function () {
+  // Get instances and configuration
+  var config = <%- config %>;
+
   // Initialize SlickGrid (instances list)
   var portFormatter =
     function portFormatter (row, cell, value, columnDef, dataContext) {
-      var url = window.location.href.replace('35267', dataContext.port);
+      var url = window.location.href.replace(config.port, dataContext.port);
       var str = value + ' <a href="' + url + '">' +
                 '<i class="status icon-home"  title="Go to the instance"></i>' +
                 '</a>';
@@ -274,9 +277,6 @@ $(function () {
     }
     return true;
   }
-
-  // Get instances
-  var config = <%- config %>;
 
   //////////////////////////////
   $.ajax({
