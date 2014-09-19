@@ -213,9 +213,18 @@
 <script type="text/javascript">
 $(function () {
   // Initialize SlickGrid (instances list)
+  var portFormatter =
+    function portFormatter (row, cell, value, columnDef, dataContext) {
+      var url = window.location.href.replace('35267', dataContext.port);
+      var str = value + ' <a href="' + url + '">' +
+                '<i class="status icon-home"  title="Go to the instance"></i>' +
+                '</a>';
+      return str;
+    };
+
   var columns = [
     {id:"title", name:"Title", field:"title", sortable:true},
-    {id:"port", name:"Port", field:"port", sortable:true},
+    {id:"port", name:"Port", field:"port", sortable:true, formatter: portFormatter},
     {id:"technicalName", name:"Technical name", field:"technicalName", sortable:true},
     {id:"date", name:"Creation date", field:"date", sortable:true},
     {id:"actions", name: "Actions", field: "actions", formatter: Slick.Formatters.ActionFormatter/*, width: 1*/}
