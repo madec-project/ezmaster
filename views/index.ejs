@@ -126,7 +126,10 @@
   }
 
   .editor {
-    height: 100%;
+    height: 45%;
+    position: absolute;
+    width: 97%;
+    bottom: 5%;
   }
 
 </style>
@@ -224,10 +227,12 @@
 <!-- JSON Editor -->
 <div id="settingsEditor" class="editor" style="display:none">
   <div class="toolbar">
-    <button id="settingsSaveButton">Save</button>
+    <button id="settings-save-button">Save</button>
 
-    <button id="modeTextButton">Text</button>
-    <button id="modeTreeButton">Tree</button>
+    <button id="mode-text-button">Text</button>
+    <button id="mode-tree-button" style="display:none">Tree</button>
+
+    <button id="settings-close-button">Close</button>
   </div>
 </div>
 
@@ -386,7 +391,7 @@ $(function () {
         $('#settingsEditor').toggle();
       });
 
-      $('#settingsSaveButton').click(function (e) {
+      $('#settings-save-button').click(function (e) {
         var id = editor.getName();
         var newSettings = Object.merge(list[id], editor.get());
         var putting = $.ajax({
@@ -412,7 +417,22 @@ $(function () {
           }
           alert(errText);
         });
+      });
 
+      $('#mode-text-button').click(function (e) {
+        editor.setMode('text');
+        $('#mode-text-button').hide();
+        $('#mode-tree-button').show();
+      });
+
+      $('#mode-tree-button').click(function (e) {
+        editor.setMode('tree');
+        $('#mode-text-button').show();
+        $('#mode-tree-button').hide();
+      });
+
+      $('#settings-close-button').click(function (e) {
+        $('#settingsEditor').hide();
       });
 
       // Statuses //
