@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/plugins/slick.headerbuttons.css" type="text/css"/>
 
+<script type="text/javascript" src="/javascripts/sugar.min.js"></script>
+
 <script type="text/javascript" src="/SlickGrid/lib/firebugx.js"></script>
 
 <!-- <script type="text/javascript" src="/SlickGrid/lib/jquery-1.7.min.js"></script>
@@ -221,6 +223,12 @@
 
 <!-- JSON Editor -->
 <div id="settingsEditor" class="editor" style="display:none">
+  <div class="toolbar">
+    <button id="settingsSaveButton">Save</button>
+
+    <button id="modeTextButton">Text</button>
+    <button id="modeTreeButton">Tree</button>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -364,7 +372,7 @@ $(function () {
         var id = $(this).data().id
         // console.info('settings ' + id);
         // Instances settings are in var list.
-        var settings = list[id];
+        var settings = Object.clone(list[id]);
         delete settings.id;
         delete settings.collectionName;
         delete settings.data_path;
@@ -376,6 +384,35 @@ $(function () {
         editor.set(settings);
         editor.setName(id);
         $('#settingsEditor').toggle();
+      });
+
+      $('#settingsSaveButton').click(function (e) {
+        var id = editor.getName();
+        var newSettings = Object.merge(list[id], editor.get());
+        var putting = $.ajax({
+          url: '/instance/' + id,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(newSettings)
+        });
+        // Action done
+        putting.done(function (data) {
+          displayStatus(id, !newSettings.turnoffAll);
+          list[id] = newSettings;
+        })
+        putting.fail(function (err) {
+          console.error(err);
+          var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
+          if (err.status === 403 || err.status === 400) {
+            errText = err.responseText;
+            var op = errText.indexOf('<p>');
+            var cp = errText.indexOf('</p>');
+            errText = errText.substring(op + 3, cp);
+            console.error(op, cp, errText);
+          }
+          alert(errText);
+        });
+
       });
 
       // Statuses //
