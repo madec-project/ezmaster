@@ -364,7 +364,16 @@ $(function () {
         var id = $(this).data().id
         // console.info('settings ' + id);
         // Instances settings are in var list.
-        editor.set(list[id]);
+        var settings = list[id];
+        delete settings.id;
+        delete settings.collectionName;
+        delete settings.data_path;
+        delete settings.date;
+        delete settings.port;
+        delete settings.users;
+        delete settings.connexionURI;
+        delete settings.turnoffAll;
+        editor.set(settings);
         editor.setName(id);
         $('#settingsEditor').toggle();
       });
