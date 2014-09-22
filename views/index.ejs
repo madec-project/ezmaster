@@ -121,7 +121,7 @@
     background-color: greenyellow;
   }
 
-  .icon-remove {
+  .status.icon-remove {
     background-color: bisque;
   }
 
@@ -232,7 +232,7 @@
     <button id="mode-text-button" class="btn">Text</button>
     <button id="mode-tree-button" class="btn" style="display:none">Tree</button>
 
-    <button id="settings-close-button" class="btn">Close</button>
+    <button id="settings-close-button" class="btn"><i class="icon-remove"></i> Close</button>
   </div>
 </div>
 
@@ -365,11 +365,20 @@ $(function () {
 
 
       // Settings //
+      var editor;
       var warnClose = function warnClose() {
         $('#settings-close-button').addClass('btn-warning');
+        try {
+          var e = editor.get();
+          $('#settings-save-button').removeClass('disabled');
+        }
+        catch (e) {
+          $('#settings-save-button').addClass('disabled');
+        }
       };
       var normalClose = function normalClose() {
         $('#settings-close-button').removeClass('btn-warning');
+        $('#settings-save-button').removeClass('disabled');
       };
       var jseOptions = {
         name: "No instance selected",
@@ -377,7 +386,7 @@ $(function () {
         change: warnClose
       };
       var edContainer = document.getElementById('settingsEditor');
-      var editor = new JSONEditor(edContainer,jseOptions);
+      editor = new JSONEditor(edContainer,jseOptions);
 
       $('.settings').click(function (e) {
         "use strict";
