@@ -227,12 +227,12 @@
 <!-- JSON Editor -->
 <div id="settingsEditor" class="editor" style="display:none">
   <div class="toolbar">
-    <button id="settings-save-button">Save</button>
+    <button id="settings-save-button" class="btn btn-primary">Save</button>
 
-    <button id="mode-text-button">Text</button>
-    <button id="mode-tree-button" style="display:none">Tree</button>
+    <button id="mode-text-button" class="btn">Text</button>
+    <button id="mode-tree-button" class="btn" style="display:none">Tree</button>
 
-    <button id="settings-close-button">Close</button>
+    <button id="settings-close-button" class="btn">Close</button>
   </div>
 </div>
 
@@ -365,9 +365,16 @@ $(function () {
 
 
       // Settings //
+      var warnClose = function warnClose() {
+        $('#settings-close-button').addClass('btn-warning');
+      };
+      var normalClose = function normalClose() {
+        $('#settings-close-button').removeClass('btn-warning');
+      };
       var jseOptions = {
         name: "No instance selected",
-        mode: "tree"       // tree (default), view, form, text, code
+        mode: "tree",       // tree (default), view, form, text, code
+        change: warnClose
       };
       var edContainer = document.getElementById('settingsEditor');
       var editor = new JSONEditor(edContainer,jseOptions);
@@ -388,7 +395,8 @@ $(function () {
         delete settings.turnoffAll;
         editor.set(settings);
         editor.setName(id);
-        $('#settingsEditor').toggle();
+        $('#settingsEditor').show();
+        normalClose();
       });
 
       $('#settings-save-button').click(function (e) {
@@ -404,6 +412,7 @@ $(function () {
         putting.done(function (data) {
           displayStatus(id, !newSettings.turnoffAll);
           list[id] = newSettings;
+          normalClose();
         })
         putting.fail(function (err) {
           console.error(err);
