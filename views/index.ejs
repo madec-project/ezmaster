@@ -156,15 +156,15 @@
     <div class="row" id="part1">
       <label for="technicalName_part1" class="span2" title="alphanumeric">Partner/project
       </label>
-      <input class="span3" type="text" name="technicalName_part1" id="technicalName_part1" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" />
+      <input class="span3" type="text" name="technicalName_part1" id="technicalName_part1" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
     </div>
     <div class="row" id="part2">
       <label for="technicalName_part2" class="span2" title="alphanumeric">Study</label>
-      <input class="span3" type="text" name="technicalName_part2" id="technicalName_part2" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" />
+      <input class="span3" type="text" name="technicalName_part2" id="technicalName_part2" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
     </div>
     <div class="row" id="part3">
       <label for="technicalName_part3" class="span2" title="alphanumeric">Version</label>
-      <input class="span3" type="text" name="technicalName_part3" id="technicalName_part3" required pattern="[0-9]+" placeholder="digits" />
+      <input class="span3" type="text" name="technicalName_part3" id="technicalName_part3" required pattern="[0-9]+" placeholder="digits" title="Only digits" />
     </div>
     <div class="row hidden" id="url">
       <label for="accel" class="span2" title="Instance's external URL">
@@ -278,7 +278,7 @@ $(function () {
   var data = [];
   var makeButtons = function makeButtons() {
     $('.upload-button').button({icons: { primary: 'ui-icon-arrowthickstop-1-s' }, text: false});
-    $('.modify-button').button({icons: { primary: 'ui-icon-pencil' }, text: false});
+    // $('.modify-button').button({icons: { primary: 'ui-icon-pencil' }, text: false});
     $('.delete-button').button({icons: { primary: 'ui-icon-trash' }, text: false});    
   }
 
@@ -540,6 +540,7 @@ $(function () {
       $('.status-toggle[data-status="stopped"]').click(start);
       // Reinitialize form depending on button (create or modify)
       $('#create-button').click(function (e) {
+        $('#title').focus();
         $('#create-instance-form')[0].reset();
         $('#technicalName').attr('disabled');
         $('#technicalName_part1').removeAttr('disabled');
@@ -558,38 +559,37 @@ $(function () {
         $('#create-submit-button').text('Create');
         $('#createModalLabel').text('Create an instance');
       });
-      $('.modify-button').click(function (e) {
-        var thisid = $(this).data().id; // e.target.dataset.id
-        $('#url').removeClass('hidden');
-        $('#internal_url').removeClass('hidden');
-        $('#date').removeClass('hidden');
-        $('#create-submit-button').text('Modify');
-        $('#createModalLabel').text('Modify an instance');
-        // get instance data
-        $.get('/instance/' + thisid, function (data) {
-        // put data in modal window
-        $('#technicalName').val(thisid)
-          .attr('disabled', 'disabled');
-        $('#technicalName').removeClass('hidden');
-        $('#technicalName_part1').addClass('hidden').val('1');
-        $('#technicalName_part2').addClass('hidden').val('2');
-        $('#technicalName_part3').addClass('hidden').val('3');
-        $('#part1').addClass('hidden');
-        $('#part2').addClass('hidden');
-        $('#part3').addClass('hidden');
+      // $('.modify-button').click(function (e) {
+      //   var thisid = $(this).data().id; // e.target.dataset.id
+      //   $('#url').removeClass('hidden');
+      //   $('#internal_url').removeClass('hidden');
+      //   $('#date').removeClass('hidden');
+      //   $('#create-submit-button').text('Modify');
+      //   $('#createModalLabel').text('Modify an instance');
+      //   // get instance data
+      //   $.get('/instance/' + thisid, function (data) {
+      //   // put data in modal window
+      //   $('#technicalName').val(thisid)
+      //     .attr('disabled', 'disabled');
+      //   $('#technicalName').removeClass('hidden');
+      //   $('#technicalName_part1').addClass('hidden').val('1');
+      //   $('#technicalName_part2').addClass('hidden').val('2');
+      //   $('#technicalName_part3').addClass('hidden').val('3');
+      //   $('#part1').addClass('hidden');
+      //   $('#part2').addClass('hidden');
+      //   $('#part3').addClass('hidden');
         
-        $('#title').val(data.title);
-        $('#accel').val(data.accel);
-        $('#url_root').val(data.url_root);
-        $('#url_root').attr('disabled', 'disabled');
-        $('#date_input').val(data.date);
-        $('#tblAppendGrid').appendGrid('load', data.users);
-        $('#create-submit-button').removeAttr('disabled');/**/
-        });
-      });
+      //   $('#title').val(data.title);
+      //   $('#accel').val(data.accel);
+      //   $('#url_root').val(data.url_root);
+      //   $('#url_root').attr('disabled', 'disabled');
+      //   $('#date_input').val(data.date);
+      //   $('#tblAppendGrid').appendGrid('load', data.users);
+      //   $('#create-submit-button').removeAttr('disabled');/**/
+      //   });
+      // });
       // Control inputs
       $('#technicalName_part1, #technicalName_part2, #technicalName_part3').keyup(function (e) {
-        console.log("here ?");
         var tcp1 = $('#technicalName_part1').val();
         var tcp2 = $('#technicalName_part2').val();
         var tcp3 = $('#technicalName_part3').val();
@@ -602,7 +602,6 @@ $(function () {
           $('#create-submit-button').attr('disabled', 'disabled');
         }
       });
-
 
 
       grid.onSort.subscribe(function (e, args) {
@@ -643,8 +642,6 @@ $(function () {
       // Modify delete button behavior: update deleteModal
       $('.delete-button').click(function (e) {
         var thisid = $(this).data().id; // e.target.dataset.id
-        console.log('destruction');
-        console.log(thisid);
         $('#deleteModalId').text(thisid);
         $.ajax({
           url: "/instance/" + thisid + "/volume.json"
@@ -676,7 +673,6 @@ $(function () {
   $('#create-instance-form').submit(function (event) {
     // Stop form from submitting normally
     event.preventDefault();
-    console.log("submit");
     // Get the form data
     var $form = $(this),
         title = $('#title').val(),

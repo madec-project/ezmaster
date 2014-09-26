@@ -40,11 +40,11 @@
             ref +
             '"</a> ' +
 
-            '<a href="#createModal"' +
-            ' data-toggle="modal" data-id="' + ref + '"' +
-            ' class="modify-button" style="font-size:50%">Modify instance "' +
-            ref +
-            '"</a> ' +
+            // '<a href="#createModal"' +
+            // ' data-toggle="modal" data-id="' + ref + '"' +
+            // ' class="modify-button" style="font-size:50%">Modify instance "' +
+            // ref +
+            // '"</a> ' +
 
             '<a  href="#deleteModal"' +
             ' data-toggle="modal" data-id="' + ref + '"' +
