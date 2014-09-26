@@ -642,19 +642,19 @@ $(function () {
       });
 
       // Initialize appendGrid
-      $('#tblAppendGrid').appendGrid({
-        caption: 'Utilisateurs / rôles',
-        initRows: 1,
-        columns: [
-          { name: 'email', display: 'Email', type: 'email', ctrlAttr: { maxlength: 100 }, ctrlCss: { width: '200px'} },
-          { name: 'role', display: 'Role', type: 'select', ctrlOptions: { uploader: 'uploader', manager: 'manager', admin: 'administrator'}, ctrlCss: { width: '140px'} },
-          { name: 'RecordId', type: 'hidden', value: 0 }
-        ],
-        i18n: {
-          append: 'Add a user',
-          removeLast: 'Remove the last user'
-        }
-      });
+      // $('#tblAppendGrid').appendGrid({
+      //   caption: 'Utilisateurs / rôles',
+      //   initRows: 1,
+      //   columns: [
+      //     { name: 'email', display: 'Email', type: 'email', ctrlAttr: { maxlength: 100 }, ctrlCss: { width: '200px'} },
+      //     { name: 'role', display: 'Role', type: 'select', ctrlOptions: { uploader: 'uploader', manager: 'manager', admin: 'administrator'}, ctrlCss: { width: '140px'} },
+      //     { name: 'RecordId', type: 'hidden', value: 0 }
+      //   ],
+      //   i18n: {
+      //     append: 'Add a user',
+      //     removeLast: 'Remove the last user'
+      //   }
+      // });
       // Modify delete button behavior: update deleteModal
       $('.delete-button').click(function (e) {
         var thisid = $(this).data().id; // e.target.dataset.id
