@@ -122,7 +122,7 @@
   }
 
   .status.icon-remove {
-    background-color: bisque;
+    text-align: center;
   }
 
   .editor {
@@ -130,6 +130,11 @@
     position: absolute;
     width: 97%;
     bottom: 5%;
+  }
+
+  .validMessage {
+    margin-left: 20%;
+
   }
 
 </style>
@@ -157,14 +162,17 @@
       <label for="technicalName_part1" class="span2" title="alphanumeric">Partner/project
       </label>
       <input class="span3" type="text" name="technicalName_part1" id="technicalName_part1" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
+      <div class="validMessage alert alert-error" style="display:none">Only lower case letters and digits</div>
     </div>
     <div class="row" id="part2">
       <label for="technicalName_part2" class="span2" title="alphanumeric">Study</label>
       <input class="span3" type="text" name="technicalName_part2" id="technicalName_part2" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
+      <div class="validMessage alert alert-error" style="display:none">Only lower case letters and digits</div>
     </div>
     <div class="row" id="part3">
       <label for="technicalName_part3" class="span2" title="alphanumeric">Version</label>
       <input class="span3" type="text" name="technicalName_part3" id="technicalName_part3" required pattern="[0-9]+" placeholder="digits" title="Only digits" />
+      <div class="validMessage alert alert-error" style="display:none">Only digits</div>
     </div>
     <div class="row hidden" id="url">
       <label for="accel" class="span2" title="Instance's external URL">
@@ -590,6 +598,14 @@ $(function () {
       // });
       // Control inputs
       $('#technicalName_part1, #technicalName_part2, #technicalName_part3').keyup(function (e) {
+
+        if(!e.currentTarget.validity.valid) {
+          $('#' + e.currentTarget.id + ' + .validMessage').show();
+        }
+        else {
+          $('#' + e.currentTarget.id + ' + .validMessage').hide();
+        }
+
         var tcp1 = $('#technicalName_part1').val();
         var tcp2 = $('#technicalName_part2').val();
         var tcp3 = $('#technicalName_part3').val();
