@@ -599,11 +599,12 @@ $(function () {
       // Control inputs
       $('#technicalName_part1, #technicalName_part2, #technicalName_part3').keyup(function (e) {
 
-        if(!e.currentTarget.validity.valid) {
-          $('#' + e.currentTarget.id + ' + .validMessage').show();
+        var t = e.currentTarget;
+        if(!t.validity.valid && !t.validity.valueMissing) {
+          $('#' + t.id + ' + .validMessage').show();
         }
         else {
-          $('#' + e.currentTarget.id + ' + .validMessage').hide();
+          $('#' + t.id + ' + .validMessage').hide();
         }
 
         var tcp1 = $('#technicalName_part1').val();
