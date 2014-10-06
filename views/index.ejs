@@ -702,7 +702,8 @@ $(function () {
     if ($('#create-submit-button').text() !== 'Create') {
       technicalName = $('#technicalName').val();
     }
-    var newUsers = (users[0].email ? users : null);
+    // var newUsers = (users[0].email ? users : null);
+    var newUsers = null;
     // Send the data using post
     var posting = $.post('/instance/', {
       title: title,
