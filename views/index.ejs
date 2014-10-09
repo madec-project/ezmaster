@@ -240,7 +240,7 @@
     <button id="mode-text-button" class="btn">Text</button>
     <button id="mode-tree-button" class="btn" style="display:none">Tree</button>
 
-    <button id="settings-close-button" class="btn"><i class="icon-remove"></i> Close</button>
+    <button id="settings-cancel-button" class="btn"><i class="icon-remove"></i> Cancel</button>
   </div>
 </div>
 
@@ -375,7 +375,7 @@ $(function () {
       // Settings //
       var editor;
       var warnClose = function warnClose() {
-        $('#settings-close-button').addClass('btn-warning');
+        $('#settings-cancel-button').addClass('btn-warning');
         try {
           var e = editor.get();
           $('#settings-save-button').removeClass('disabled');
@@ -385,7 +385,7 @@ $(function () {
         }
       };
       var normalClose = function normalClose() {
-        $('#settings-close-button').removeClass('btn-warning');
+        $('#settings-cancel-button').removeClass('btn-warning');
         $('#settings-save-button').removeClass('disabled');
       };
       var jseOptions = {
@@ -457,7 +457,7 @@ $(function () {
         $('#mode-tree-button').hide();
       });
 
-      $('#settings-close-button').click(function (e) {
+      $('#settings-cancel-button').click(function (e) {
         $('#settingsEditor').hide();
       });
 
