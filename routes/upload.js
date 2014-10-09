@@ -12,6 +12,7 @@ var mv     = require('mv');
 // var cas = require('../middleware/casauth');
 var getInstancesConfig = require('../lib/instances.js').getInstancesConfig;
 var getUpdatableInstances = require('../lib/instances.js').getUpdatableInstances;
+var processes          = require('../lib/processes');
 
 module.exports = function (server) {
 
@@ -51,7 +52,6 @@ module.exports = function (server) {
 
     debug('POST /upload');
     var status = "Please select a file to send!";
-    var alertType = "";
 
     if (req.files.notices.size === 0)
     {
@@ -93,9 +93,19 @@ module.exports = function (server) {
         );
         mv(notice.path, target_path, function afterMv(err) {
           if (!err) {
-            var message = 'The file "' + notice.name +
-                          '" has been uploaded. ';
-            req.flash('success', message);
+            var pm2Conf = processes.getInstanceFromJson(instance, processes.getJsonPath(),
+              function afterGetInstanceFromJson(err, pm2conf) {
+              if (err) {
+                cb(err);
+                return;
+              }
+              var port    = pm2conf.port;
+              var url     = "http://" + req.headers.host.replace(config.port, port);
+              var message = 'The file "' + notice.name +
+                            '" has been uploaded to '+
+                            '<a href="' + url + '">'+ instance + '</a>.';
+              req.flash('success', message);
+            });
           }
           cb(err);
         });

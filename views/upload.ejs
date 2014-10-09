@@ -43,7 +43,7 @@ config.instances[instance].url_root %>">See the data</a>
   <% for (var type in status) { %>
   <div class="alert alert-<%= type %>">
     <button class="close" type="button" data-dismiss="alert">&times;</button>
-    <%= status[type] %>
+    <%- status[type] %>
   </div>
     
   <% } %>
