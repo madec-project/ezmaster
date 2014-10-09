@@ -241,6 +241,7 @@
     <button id="mode-tree-button" class="btn" style="display:none">Tree</button>
 
     <button id="settings-cancel-button" class="btn"><i class="icon-remove"></i> Cancel</button>
+    <span></span>
   </div>
 </div>
 
@@ -379,8 +380,11 @@ $(function () {
         try {
           var e = editor.get();
           $('#settings-save-button').removeClass('disabled');
+          $('.toolbar>span').text('');
         }
         catch (e) {
+          console.warn(e);
+          $('.toolbar>span').text(e.message);
           $('#settings-save-button').addClass('disabled');
         }
       };
