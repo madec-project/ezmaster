@@ -46,5 +46,11 @@
     "jshint": "^2.5.5",
     "mocha": "^1.21.4",
     "request": "^2.40.0"
+  },
+  "peerDependencies": {
+    "castor-core": "*",
+    "castor-cli": "*",
+    "castor-clean": "*",
+    "pm2": "*"
   }
 }
