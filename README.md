@@ -8,16 +8,11 @@ Administration for Castor instances using the same theme
 Prequired: nodejs (version 0.11.13+), mongodb (version 2+)
 
 ```bash
-$ git clone https://github.com/castorjs/castor-admin.git
-$ cd castor-admin
-$ npm install
+$ npm install -g castor-core
 $ npm install -g castor-cli
-```
-
-Optional: if you want to interact with instances using a command line, install pm2:
-
-```bash
+$ npm install -g castor-clean
 $ npm install -g pm2
+$ npm install -g castor-admin
 ```
 
 ## Configuration
