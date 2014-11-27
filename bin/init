@@ -7,8 +7,10 @@
 
 var debug               = require('debug')('castor:admin:bin');
 var fs                  = require('fs');
+var path                = require('path');
 var instances_path      = require('../config.js').instances_path;
 var instances_json_path = instances_path + '.json';
+var apps_path           = path.resolve(process.env.HOME, 'apps');
 
 var adminPM2 =
 {
@@ -26,4 +28,8 @@ var adminPM2 =
 if (!fs.existsSync(instances_path)) {
 	fs.mkdir(instances_path);
 	fs.writeFile(instances_json_path, JSON.stringify(adminPM2, null, ' '));
+}
+
+if (!fs.existsSync(apps_path)) {
+    fs.mkdir(apps_path);
 }

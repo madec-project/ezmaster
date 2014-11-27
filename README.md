@@ -7,6 +7,17 @@ Administration for Castor instances using the same theme
 
 Prequired: nodejs (version 0.11.13+), mongodb (version 2+)
 
+From 0.6.0:
+```bash
+$ npm install -g castor-clean
+$ npm install -g pm2
+$ npm install -g castor-admin
+```
+
+Then, install at least one app in `~/apps` (see [Apps](#apps)).
+
+Until 0.5.0:
+
 ```bash
 $ npm install -g castor-core
 $ npm install -g castor-cli
@@ -18,6 +29,8 @@ $ npm install -g castor-admin
 ## Configuration
 
 ### Theme
+
+**Deprecated since 0.6.0, see [Apps](#apps).**
 
 Install all the themes you want to usable in an instance through `npm`,
 using github:
@@ -37,6 +50,26 @@ To set the default theme that castor-admin will use, set the environment variabl
 ```bash
 export THEME=castor-theme-dashboard
 ```
+
+### Apps
+WARNING
+From 0.6.0 and up, the app notion has appeared. An app is a theme, in some specific version.
+The use of an app is mandatory for each new instance in 0.6.0+.
+
+They are located in the same directory, `$HOME/apps`.
+
+They have to be installed by unzipping a release of a theme from github.
+
+Ex (for [castor-theme-sbadmin, release v3.1.0](https://github.com/castorjs/castor-theme-sbadmin/archive/v3.2.0.tar.gz), which gives a `castor-theme-sbadmin-3.2.0.tar.gz`) :
+
+```bash
+$ cd ~/apps
+$ tar xvzf castor-theme-sbadmin-3.2.0.tar.gz
+$ cd castor-theme-sbadmin-3.2.0
+$ npm install
+```
+
+Make sure you install only apps (apps must include a `cli` file in their root directory).
 
 ### Instances
 

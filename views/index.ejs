@@ -177,6 +177,14 @@
       <input class="span3" type="text" name="technicalName_part3" id="technicalName_part3" required pattern="[0-9]+" placeholder="digits" title="Only digits" />
       <div class="validMessage alert alert-error" style="display:none">Only digits</div>
     </div>
+    <div class="row" id="part4">
+      <label for="application" class="span2">App</label>
+      <select id="app" name="application" class="span3">
+        <% for(var i=0; i<apps.length; i++) {%>
+          <option><%= apps[i] %></option>
+        <% } %>
+      </select>
+    </div>
     <div class="row hidden" id="url">
       <label for="accel" class="span2" title="Instance's external URL">
         external URL</label>
@@ -416,6 +424,7 @@ $(function () {
         delete settings.users;
         delete settings.connexionURI;
         delete settings.turnoffAll;
+        delete settings.app;
         editor.set(settings);
         editor.setName(id);
         $('#settingsEditor').show();
@@ -699,6 +708,7 @@ $(function () {
     // Get the form data
     var $form = $(this),
         title = $('#title').val(),
+        app = $('#app').val(),
         //technicalName = $('#technicalName').val(),
         technicalName = $('#technicalName_part1').val() + '_' + 
           $('#technicalName_part2').val() + '_' + $('#technicalName_part3').val();
@@ -716,6 +726,7 @@ $(function () {
       technicalName: technicalName,
       accel: accel,
       date: date,
+      app: app,
       tblAppendGrid: newUsers
     });
     // Action done
