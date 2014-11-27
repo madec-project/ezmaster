@@ -48,8 +48,6 @@
     "request": "^2.40.0"
   },
   "peerDependencies": {
-    "castor-core": "*",
-    "castor-cli": "*",
     "castor-clean": "*",
     "pm2": "*"
   }
