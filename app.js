@@ -15,6 +15,7 @@ var routes                = require('./routes');
 var Errors                = require('./lib/errors');
 var cleanSessionDir       = require('./lib/session').cleanSessionDir;
 var removeConfigLockFiles = require('./lib/instances').removeConfigLockFiles;
+var reverseproxy          = require('./middlewares/reverseproxy.js');
 // var cas = require('./middleware/casauth.js');
 
 
@@ -23,6 +24,7 @@ var app = express();
 app.configure(function () {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
+  app.use(reverseproxy());
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser({uploadDir: os.tmpdir()}));
