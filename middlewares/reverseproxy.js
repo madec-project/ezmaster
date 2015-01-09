@@ -16,7 +16,8 @@ module.exports = function() {
     return function(req, res) {
 
         config.instances = getInstancesConfig();
-        var proxy = httpProxy.createProxyServer({});
+        var proxy       = httpProxy.createProxyServer({}),
+            redirected  = false;
 
         // IF Reverse proxy used
         if ((req.headers['x-forwarded-server']) && (req.headers['x-forwarded-server'] === 'termith.inist.fr')) {
@@ -38,9 +39,15 @@ module.exports = function() {
                         var url = 'http://127.0.0.1:' + value.port;
                         proxy.web(req, res, { target: url });
 
+                        redirected = true;
+
                     }
 
-                })
+                });
+
+                if(!redirected){
+                    res.redirect('http://inist.fr');
+                }
 
             }
 
