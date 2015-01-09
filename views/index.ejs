@@ -412,7 +412,9 @@ $(function () {
 
       $('.settings').click(function (e) {
         "use strict";
-        var id = $(this).data().id
+        var id = $(this).data().id;
+        $('.slick-row').removeClass('highlighted');
+        $(this).parent().parent().addClass('highlighted');
         // console.info('settings ' + id);
         // Instances settings are in var list.
         var settings = Object.clone(list[id]);
@@ -474,6 +476,7 @@ $(function () {
 
       $('#settings-cancel-button').click(function (e) {
         $('#settingsEditor').hide();
+        $('.slick-row').removeClass('highlighted');
       });
 
       // Statuses //
