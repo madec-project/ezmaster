@@ -13,7 +13,7 @@ var httpProxy = require('http-proxy');
 
 module.exports = function() {
 
-    return function(req, res) {
+    return function(req, res , next) {
 
         config.instances = getInstancesConfig();
         var proxy       = httpProxy.createProxyServer({}),
@@ -53,7 +53,11 @@ module.exports = function() {
 
         }
 
-    }
+        next();
+
+
+    };
+
 
 
 };
