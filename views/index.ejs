@@ -30,13 +30,17 @@
 <script type="text/javascript" src="javascripts/jsoneditor.min.js"></script>
 <script type="text/javascript" src="javascripts/require.js"></script>
 
-
-<h1>Instances</h1>
+<div class="jumbotron" id="h1Div">
+    <h1>Instances : </h1>
+</div>
 
 
 <p>
   <!--a href="#createModal" class="btn" id="create-button" role="button" data-toggle="modal">Créer une instance</a-->
   <a href="#createModal" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-button-icon-primary ui-icon ui-icon-plusthick" id="create-button" role="button" data-toggle="modal" title="Create an instance"></a>
+    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
+        <span class="glyphicon glyphicon-plus"></span> Add an instance
+    </button>
 </p>
 
 
@@ -142,8 +146,8 @@
   }
 </style>
 
-<!-- Create Instance Modal -->
-<div id="createModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true" data-backdrop="static">
+<!-- Create Instance Modal
+<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true" data-backdrop="static">
   <form id="create-instance-form" action="/instance/" method="post">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -217,6 +221,54 @@
     <button id="create-submit-button" type="submit" class="btn btn-primary" disabled>Create</button>
   </div>
   </form>
+</div> -->
+
+
+
+
+<!-- TEST modal -->
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create an Instance : </h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> TITLE</span>
+                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
+                </div>
+
+                <br/>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> PROJECT </span>
+                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
+                </div>
+
+                <br/>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> STUDY </span>
+                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
+                </div>
+
+                <br/>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> VERSION </span>
+                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

@@ -1,0 +1,40 @@
+/* ------------ HEADER PAGE ------------ */
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+/* Transitions effects for all links */
+a {
+    -webkit-transition:color 403ms ease-out;
+    -moz-transition:color 403ms ease-out;
+    -o-transition:color 403ms ease-out;
+    transition:color 403ms ease-out;
+}
+
+#ulHeaderLeft{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#ulHeaderRight{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#home{
+    color: #fff;
+}
+
+#home:hover{
+    text-decoration: underline;
+}
+
+/* ------------ INDEX PAGE ------------ */
+
+#h1Div{
+    text-align: center;
+    font-size: 35px;
+    font-family: verdanna;
+}
