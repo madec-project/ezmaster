@@ -45,92 +45,6 @@
 
 <div id="myGrid" style="width:100%;height:300px;"></div>
 
-<style>
-  .slick-cell.r4, .slick-cell.r5, .slick-cell.r6 {
-    text-align: center;
-  }
-
-  .slick-headerrow-column {
-    background: #87ceeb;
-    text-overflow: clip;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .slick-headerrow-column input {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .icon-select-off,
-  .icon-select-on {
-    background-image: url(/SlickGrid/images/bullet_blue.png);
-  }
-
-  .icon-select-off {
-    opacity: 0.2;
-  }
-  fieldset {
-    margin-top: 10px;
-  }
-
-  .slick-group-toggle {
-    width: 9px;
-    height: 9px;
-    margin-right: 5px;
-    }
-  .slick-group-toggle.collapsed {
-    background: url(/SlickGrid/images/expand.gif) no-repeat center center;
-  }
-  .slick-group-toggle.expanded {
-    background: url(/SlickGrid/images/collapse.gif) no-repeat center center;
-  }
-
-  .highlighted div {
-    background-color: rgba(200, 250, 200, 50);
-  }
-
-  table#columns-table {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  table#columns-table tr > td {
-    text-align: right;
-    padding-right: 10px;
-  }
-  .slick-cell-checkboxsel {
-    background: rgb(255, 201, 14);
-    border-right-color: silver;
-    border-right-style: solid;
-  }
-  .slick-cell.selected {
-    background: rgb(255, 201, 14);
-    border-right-color: silver;
-    border-right-style: solid;
-  }
-  #deleteModalId, #deleteModalVolume {
-    font-weight: bold;
-  }
-
-  .ui-button-icon-primary {
-    width: 88px;
-  }
-
-  .editor {
-    height: 45%;
-    position: absolute;
-    width: 97%;
-    bottom: 5%;
-  }
-
-  .toolbar .disabled {
-    background-color: red;
-  }
-</style>
 
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="addModal">
@@ -304,7 +218,7 @@ $(function () {
         return  '<span class="status icon-remove glyphicon glyphicon-remove actionsButtons  btn-xs" data-id="' + ref + '" title="' + ref + ' stopped"></span> ' +
                 '<a class="status-toggle btn btn btn-xs actionsButtons" data-id="' + ref + '" data-status="stopped" title="Run ' + ref + '"><span class="glyphicon glyphicon-play"></span></a> ' +
 
-                '<a class="status icon-ok glyphicon glyphicon-ok actionsButtons btn btn btn-xs" data-id="' + ref + '" title="' + ref + ' running" style="display:none"></a> ' +
+                '<span class="status icon-ok glyphicon glyphicon-ok actionsButtons btn-xs" data-id="' + ref + '" title="' + ref + ' running" style="display:none"></span> ' +
                 '<a class="status-toggle btn btn-xs actionsButtons" data-id="' + ref + '" data-status="running" title="Stop ' + ref + '" style="display:none"><span class="glyphicon glyphicon-pause"></span></a> ' +
 
                 '<a class="settings btn btn-xs actionsButtons" data-id="' + ref + '" title="Edit settings of ' + ref + '" data-toggle="modal" data-target="#settingsEditor"><span class="glyphicon glyphicon-cog"><span></a>' +

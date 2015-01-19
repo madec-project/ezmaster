@@ -5,13 +5,23 @@ body {
     padding-bottom: 40px;
 }
 
-/* Transitions effects for all links */
+
 a {
     -webkit-transition:color 403ms ease-out;
     -moz-transition:color 403ms ease-out;
     -o-transition:color 403ms ease-out;
     transition:color 403ms ease-out;
 }
+
+table#columns-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+table#columns-table tr > td {
+    text-align: right;
+    padding-right: 10px;
+}
+
 
 #ulHeaderLeft{
     display: flex;
@@ -30,6 +40,16 @@ a {
 #home:hover{
     text-decoration: underline;
 }
+
+.slick-headerrow-column input {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 
 /* ------------ INDEX PAGE ------------ */
 
@@ -130,6 +150,10 @@ a {
     color: red;
 }
 
+.highlighted div {
+    background-color: rgba(200, 250, 200, 50);
+}
+
 /* SETTINGS  */
 
 
@@ -161,4 +185,8 @@ a {
 
 #deleteModal{
     background: none repeat scroll 0% 0% rgba(0, 1, 0, 0.8);;
+}
+
+#deleteModalId, #deleteModalVolume {
+    font-weight: bold;
 }
