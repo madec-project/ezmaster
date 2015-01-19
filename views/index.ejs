@@ -1,6 +1,5 @@
 <% include header %>
 
-<link rel="stylesheet" href="/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/slick.grid.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/controls/slick.pager.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
@@ -31,15 +30,15 @@
 <script type="text/javascript" src="javascripts/require.js"></script>
 
 <div class="jumbotron" id="h1Div">
-    <h1>Instances : </h1>
+    <h1 id="homeH1">Instances : </h1>
 </div>
 
 
 <p>
   <!--a href="#createModal" class="btn" id="create-button" role="button" data-toggle="modal">Créer une instance</a-->
-  <a href="#createModal" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-button-icon-primary ui-icon ui-icon-plusthick" id="create-button" role="button" data-toggle="modal" title="Create an instance"></a>
-    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
-        <span class="glyphicon glyphicon-plus"></span> Add an instance
+  <!--<a href="#createModal" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-button-icon-primary ui-icon ui-icon-plusthick" id="create-button" role="button" data-toggle="modal" title="Create an instance"></a> -->
+    <button  id="addButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
+        <span class="glyphicon glyphicon-plus"></span> ADD AN INSTANCE
     </button>
 </p>
 
@@ -121,14 +120,6 @@
     width: 88px;
   }
 
-  .icon-ok {
-    background-color: greenyellow;
-  }
-
-  .status.icon-remove {
-    text-align: center;
-  }
-
   .editor {
     height: 45%;
     position: absolute;
@@ -136,97 +127,10 @@
     bottom: 5%;
   }
 
-  .validMessage {
-    margin-left: 20%;
-
-  }
-
   .toolbar .disabled {
     background-color: red;
   }
 </style>
-
-<!-- Create Instance Modal
-<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true" data-backdrop="static">
-  <form id="create-instance-form" action="/instance/" method="post">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="createModalLabel">Create an instance</h3>
-  </div>
-  <div class="modal-body">
-
-    <div class="row">
-      <label for="title" class="span2">Title
-      </label>
-      <input class="span3" type="text" name="title" id="title" required placeholder="Instance title" />
-    </div>
-    <div class="row hidden" id="techNameLabel">
-      <label for="technicalName" class="span2" title="alphanumeric">Technical name
-      </label>
-      <input class="span3" type="text" name="technicalName" id="technicalName" disabled required pattern="[a-z_0-9]+" placeholder="lowercase letters and digits" />
-    </div>
-    <div class="row" id="part1">
-      <label for="technicalName_part1" class="span2" title="alphanumeric">Partner/project
-      </label>
-      <input class="span3" type="text" name="technicalName_part1" id="technicalName_part1" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
-      <div class="validMessage alert alert-error" style="display:none">Only lower case letters and digits</div>
-    </div>
-    <div class="row" id="part2">
-      <label for="technicalName_part2" class="span2" title="alphanumeric">Study</label>
-      <input class="span3" type="text" name="technicalName_part2" id="technicalName_part2" required pattern="[a-z0-9]+" placeholder="lowercase letters and digits" title="Only lower case letters and digits" />
-      <div class="validMessage alert alert-error" style="display:none">Only lower case letters and digits</div>
-    </div>
-    <div class="row" id="part3">
-      <label for="technicalName_part3" class="span2" title="alphanumeric">Version</label>
-      <input class="span3" type="text" name="technicalName_part3" id="technicalName_part3" required pattern="[0-9]+" placeholder="digits" title="Only digits" />
-      <div class="validMessage alert alert-error" style="display:none">Only digits</div>
-    </div>
-    <div class="row" id="part4">
-      <label for="application" class="span2">App</label>
-      <select id="app" name="application" class="span3">
-        <% for(var i=0; i<apps.length; i++) {%>
-          <option><%= apps[i] %></option>
-        <% } %>
-      </select>
-    </div>
-    <div class="row hidden" id="url">
-      <label for="accel" class="span2" title="Instance's external URL">
-        external URL</label>
-      <input class="span3" type="url" name="accel" id="accel"
-        placeholder="http://instance.domain.co/" />
-    </div>
-    <div class="row hidden" id="internal_url">
-      <label for="url_root" class="span2" title="Instance's internal URL (computed)">
-       internal URL
-      </label>
-      <input class="span3" type="url" name="url_root" id="url_root"
-        placeholder="http://castor.intra.domain.co:35268/" />
-    </div>
-    <div class="row hidden" id="date">
-      <label for="date_input" class="span2" title="Instance's creation date">
-        Date
-      </label>
-      <input class="span3" type="text" name="date" id="date_input" disabled/>
-    </div>
-    <div class="row">
-      <label class="span5" for="tblAppendGrid">
-        You automatically become administrator for this instance.
-      </label>
-      <table class="span5" id="tblAppendGrid">
-      </table>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button id="cancel-form" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    <button id="create-submit-button" type="submit" class="btn btn-primary" disabled>Create</button>
-  </div>
-  </form>
-</div> -->
-
-
-
-
-<!-- TEST modal -->
 
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="addModal">
@@ -235,45 +139,100 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Create an Instance : </h4>
             </div>
+            <form id="create-instance-form" action="/instance/" method="post">
+
             <div class="modal-body">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> TITLE</span>
-                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
-                </div>
 
-                <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" style="width: 150px;"> TITLE </span>
+                        <input id="title" type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1" style="width: 450px;" required >
+                    </div>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> PROJECT </span>
-                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
-                </div>
+                    <br/>
 
-                <br/>
+                    <div class="row hidden" id="techNameLabel">
+                        <label for="technicalName" class="span2" title="alphanumeric">Technical name
+                        </label>
+                        <input class="span3" type="text" name="technicalName" id="technicalName" disabled required pattern="[a-z_0-9]+" placeholder="lowercase letters and digits" />
+                    </div>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> STUDY </span>
-                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
-                </div>
+                    <div class="input-group" id="part1">
+                        <span class="input-group-addon"  style="width: 150px;">  PROJECT </span>
+                        <input type="text" class="form-control" title="lowercase alphanumeric"  pattern="[a-z_0-9]+" name="technicalName_part1" id="technicalName_part1" placeholder="Project Name" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <div class="validMessage alert alert-danger" style="display:none">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Only lower case letters and digits
+                        </div>
+                    </div>
 
-                <br/>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"> <span class="glyphicon glyphicon-chevron-right"></span> VERSION </span>
-                    <input type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1">
-                </div>
+                    <br/>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" style="width: 150px;">  STUDY </span>
+                        <input id="technicalName_part2" type="text" class="form-control" title="lowercase alphanumeric" placeholder="Study Name"  pattern="[a-z_0-9]+" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <div class="validMessage alert alert-danger" style="display:none">Only lower case letters and digits</div>
+                    </div>
+
+                    <br/>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"  style="width: 150px;"> VERSION </span>
+                        <input id="technicalName_part3" type="text" class="form-control" title="numeric" min="0" placeholder="Instance Version" pattern="[0-9]+" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <div class="validMessage alert alert-danger" style="display:none">Only digits</div>
+                    </div>
+
+                    <br/>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"  style="width: 150px;"> APP </span>
+                        <select id="app" name="application" class="span3" style="width: 450px;" required>
+                            <% for(var i=0; i<apps.length; i++) {%>
+                            <option><%= apps[i] %></option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="row hidden" id="url">
+                        <label for="accel" class="span2" title="Instance's external URL">
+                            external URL</label>
+                        <input class="span3" type="url" name="accel" id="accel"
+                               placeholder="http://instance.domain.co/" />
+                    </div>
+                    <div class="row hidden" id="internal_url">
+                        <label for="url_root" class="span2" title="Instance's internal URL (computed)">
+                            internal URL
+                        </label>
+                        <input class="span3" type="url" name="url_root" id="url_root"
+                               placeholder="http://castor.intra.domain.co:35268/" />
+                    </div>
+                    <div class="row hidden" id="date">
+                        <label for="date_input" class="span2" title="Instance's creation date">
+                            Date
+                        </label>
+                        <input class="span3" type="text" name="date" id="date_input" disabled/>
+                    </div>
+                    <div class="row hidden">
+                        <table class="span5" id="tblAppendGrid">
+                        </table>
+                    </div>
+
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <button type="submit" id="create-submit-button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>Create</button>
             </div>
+
+            </form>
+
         </div>
     </div>
 </div>
 
 
 <!-- Remove instance modal -->
-<div id="deleteModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <form id="delete-instance-form" method="delete">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -296,16 +255,29 @@
 </div>
 
 <!-- JSON Editor -->
-<div id="settingsEditor" class="editor" style="display:none">
-  <div class="toolbar">
-    <button id="settings-save-button" class="btn btn-primary">Save</button>
+<div id="settingsEditor" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="deleteModalLabel">Edit an instance : </h3>
+            </div>
+            <div class="modal-body">
+              <div class="toolbar">
 
-    <button id="mode-text-button" class="btn">Text</button>
-    <button id="mode-tree-button" class="btn" style="display:none">Tree</button>
+                <button id="mode-text-button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-retweet"></span> Text</button>
+                <button id="mode-tree-button" class="btn btn-default btn-lg" style="display:none"> <span class="glyphicon glyphicon-retweet"></span> Tree</button>
 
-    <button id="settings-cancel-button" class="btn"><i class="icon-remove"></i> Cancel</button>
-    <span></span>
-  </div>
+                <div id="settingsEditorDiv"></div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button id="settings-save-button" class="btn btn-success"> <span class="glyphicon glyphicon-ok"> Save</button>
+                <button id="settings-cancel-button" class="btn btn-danger" data-dismiss="modal"> <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -318,9 +290,35 @@ $(function () {
     function portFormatter (row, cell, value, columnDef, dataContext) {
       var url = window.location.href.replace(config.port, dataContext.port);
       var str = value + ' <a href="' + url + '">' +
-                '<i class="status icon-home"  title="Go to the instance"></i>' +
+                '<span class="status glyphicon glyphicon-link"  title="Go to the instance" target="_blank></span>' +
                 '</a>';
       return str;
+    };
+
+  var actionFormatter =
+    function ActionFormatter(row, cell, value, columnDef, dataContext) {
+        var ref = dataContext.technicalName;
+        return  '<span class="status icon-remove glyphicon glyphicon-remove actionsButtons  btn-xs" data-id="' + ref + '" title="' + ref + ' stopped"></span> ' +
+                '<a class="status-toggle btn btn btn-xs actionsButtons" data-id="' + ref + '" data-status="stopped" title="Run ' + ref + '"><span class="glyphicon glyphicon-play"></span></a> ' +
+
+                '<a class="status icon-ok glyphicon glyphicon-ok actionsButtons btn btn btn-xs" data-id="' + ref + '" title="' + ref + ' running" style="display:none"></a> ' +
+                '<a class="status-toggle btn btn-xs actionsButtons" data-id="' + ref + '" data-status="running" title="Stop ' + ref + '" style="display:none"><span class="glyphicon glyphicon-pause"></span></a> ' +
+
+                '<a class="settings btn btn-xs actionsButtons" data-id="' + ref + '" title="Edit settings of ' + ref + '" data-toggle="modal" data-target="#settingsEditor"><span class="glyphicon glyphicon-cog"><span></a>' +
+
+                '<a href="/upload/' + ref + '"' +
+                ' class="upload-button btn btn-xs actionsButtons" >  <span class="glyphicon glyphicon-download-alt"></span></a> ' +
+
+            // '<a href="#createModal"' +
+            // ' data-toggle="modal" data-id="' + ref + '"' +
+            // ' class="modify-button" style="font-size:50%">Modify instance "' +
+            // ref +
+            // '"</a> ' +
+
+                '<a  href="#deleteModal"' +
+                ' data-toggle="modal" data-id="' + ref + '"' +
+                ' class="delete-button btn btn-xs actionsButtons"> <span class="glyphicon glyphicon-trash"></span></a> '
+                ;
     };
 
   var columns = [
@@ -328,7 +326,7 @@ $(function () {
     {id:"port", name:"Port", field:"port", sortable:true, formatter: portFormatter},
     {id:"technicalName", name:"Technical name", field:"technicalName", sortable:true},
     {id:"date", name:"Creation date", field:"date", sortable:true},
-    {id:"actions", name: "Actions", field: "actions", formatter: Slick.Formatters.ActionFormatter/*, width: 1*/}
+    {id:"actions", name: "Actions", field: "actions", formatter: actionFormatter/*, width: 1*/}
   ];
 
   var options = {
@@ -349,10 +347,10 @@ $(function () {
   var columnFilters = {};
   var data = [];
   var makeButtons = function makeButtons() {
-    $('.upload-button').button({icons: { primary: 'ui-icon-arrowthickstop-1-s' }, text: false});
+    $('.upload-button').button({icons: { primary: 'glyphicon glyphicon-download-alt' }, text: false});
     // $('.modify-button').button({icons: { primary: 'ui-icon-pencil' }, text: false});
-    $('.delete-button').button({icons: { primary: 'ui-icon-trash' }, text: false});    
-  }
+    $('.delete-button').button({icons: { primary: 'ui-icon-trash' }, text: false});
+  };
 
   function filter(item) {
     for (var columnId in columnFilters) {
@@ -459,7 +457,7 @@ $(function () {
         mode: "tree",       // tree (default), view, form, text, code
         change: warnClose
       };
-      var edContainer = document.getElementById('settingsEditor');
+      var edContainer = document.getElementById('settingsEditorDiv');
       editor = new JSONEditor(edContainer,jseOptions);
 
       $('.settings').click(function (e) {
@@ -672,9 +670,11 @@ $(function () {
         var t = e.currentTarget;
         if(!t.validity.valid && !t.validity.valueMissing) {
           $('#' + t.id + ' + .validMessage').show();
+          $('#' + t.id).css('border-color' , 'red');
         }
         else {
           $('#' + t.id + ' + .validMessage').hide();
+          $('#' + t.id).css('border-color' , '');
         }
 
         var tcp1 = $('#technicalName_part1').val();
@@ -769,10 +769,8 @@ $(function () {
           $('#technicalName_part2').val() + '_' + $('#technicalName_part3').val();
         accel = $('#accel').val();
         date = $('#date_input').val();
-        users = $('#tblAppendGrid').appendGrid('getAllValue');
-    if ($('#create-submit-button').text() !== 'Create') {
-      technicalName = $('#technicalName').val();
-    }
+        users = null;
+
     // var newUsers = (users[0].email ? users : null);
     var newUsers = null;
     // Send the data using post
@@ -838,11 +836,5 @@ $(function () {
 })
 </script>
 
-<!-- Append Grid -->
-<link href="/javascripts/jquery.appendGrid/jquery.appendGrid-1.1.2.css" rel="stylesheet"/>
-<script src="/javascripts/jquery.appendGrid/jquery.appendGrid-1.1.2.js"></script>
-
-<link href="/javascripts/jquery-ui-1.10.3.custom/css/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-<script src="/javascripts/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
 
 <% include footer %>
