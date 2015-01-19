@@ -156,3 +156,9 @@ a {
     margin: 10px;
     font-size: 15px;
 }
+
+/* DELETE */
+
+#deleteModal{
+    background: none repeat scroll 0% 0% rgba(0, 1, 0, 0.8);;
+}

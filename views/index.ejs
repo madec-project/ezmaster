@@ -233,25 +233,29 @@
 
 <!-- Remove instance modal -->
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <form id="delete-instance-form" method="delete">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="deleteModalLabel">Remove an instance</h3>
-  </div>
-  <div class="modal-body">
-  <p>
-    You are about to permanently delete the instance 
-    <span id="deleteModalId">id</span>, are you sure?
-  </p>
-  <p>
-    This instance represents <span id="deleteModalVolume"></span> data.
-  </p>
-  </div>
-  <div class="modal-footer">
-    <button id="cancel-form" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    <button id="delete-submit-button" type="submit" class="btn btn-primary">Remove</button>
-  </div>
-  </form>
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="delete-instance-form" method="delete">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="deleteModalLabel">Remove an instance</h3>
+              </div>
+              <div class="modal-body">
+              <p>
+                You are about to permanently delete the instance
+                <span id="deleteModalId">id</span>, are you sure?
+              </p>
+              <p>
+                This instance represents <span id="deleteModalVolume"></span> data.
+              </p>
+              </div>
+              <div class="modal-footer">
+                <button id="cancel-form" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button id="delete-submit-button" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Remove</button>
+              </div>
+          </form>
+        </div>
+    </div>
 </div>
 
 <!-- JSON Editor -->
@@ -259,7 +263,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="deleteModalLabel">Edit an instance : </h3>
             </div>
             <div class="modal-body">
@@ -289,8 +292,8 @@ $(function () {
   var portFormatter =
     function portFormatter (row, cell, value, columnDef, dataContext) {
       var url = window.location.href.replace(config.port, dataContext.port);
-      var str = value + ' <a href="' + url + '">' +
-                '<span class="status glyphicon glyphicon-link"  title="Go to the instance" target="_blank></span>' +
+      var str = value + ' <a href="' + url + '" target="_blank">' +
+                '<span class="status glyphicon glyphicon-link"  title="Go to the instance" ></span>' +
                 '</a>';
       return str;
     };
@@ -525,7 +528,6 @@ $(function () {
       });
 
       $('#settings-cancel-button').click(function (e) {
-        $('#settingsEditor').hide();
         $('.slick-row').removeClass('highlighted');
       });
 
