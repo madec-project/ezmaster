@@ -55,6 +55,8 @@ table#columns-table tr > td {
 
 /* MAIN */
 
+
+
 #h1Div{
     display: table;
     width: 100%;
@@ -75,6 +77,13 @@ table#columns-table tr > td {
     height: 40px;
     font-size: 11px;
     font-weight: bold;
+    margin-bottom: 12px;
+    float: left;
+}
+
+#myGrid{
+    width:100%;
+    height:300px;
 }
 
 .validMessage{
@@ -152,6 +161,16 @@ table#columns-table tr > td {
 
 .highlighted div {
     background-color: rgba(200, 250, 200, 50);
+}
+
+/* CREATE */
+
+.spansCreate{
+    width: 150px !important;
+}
+
+.inputsCreate{
+    width: 450px !important;
 }
 
 /* SETTINGS  */

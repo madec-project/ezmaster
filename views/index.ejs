@@ -1,19 +1,16 @@
 <% include header %>
 
+<!-- Stylesheet files -->
 <link rel="stylesheet" href="/SlickGrid/slick.grid.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/controls/slick.pager.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
 <link rel="stylesheet" href="/SlickGrid/plugins/slick.headerbuttons.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/stylesheets/jsoneditor.min.css">
 
+<!-- Javascript files -->
 <script type="text/javascript" src="/javascripts/sugar.min.js"></script>
-
 <script type="text/javascript" src="/SlickGrid/lib/firebugx.js"></script>
-
-<!-- <script type="text/javascript" src="/SlickGrid/lib/jquery-1.7.min.js"></script>
-<script type="text/javascript" src="/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
- -->
 <script type="text/javascript" src="/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
-
 <script type="text/javascript" src="/SlickGrid/slick.core.js"></script>
 <script type="text/javascript" src="/SlickGrid/slick.editors.js"></script>
 <script type="text/javascript" src="/SlickGrid/slick.formatters.js"></script>
@@ -24,8 +21,6 @@
 <script type="text/javascript" src="/SlickGrid/slick.grid.js"></script>
 <script type="text/javascript" src="/SlickGrid/plugins/slick.headerbuttons.js"></script>
 <script type="text/javascript" src="/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
-
-<link rel="stylesheet" type="text/css" href="/stylesheets/jsoneditor.min.css">
 <script type="text/javascript" src="javascripts/jsoneditor.min.js"></script>
 <script type="text/javascript" src="javascripts/require.js"></script>
 
@@ -34,18 +29,18 @@
 </div>
 
 
-<p>
-  <!--a href="#createModal" class="btn" id="create-button" role="button" data-toggle="modal">Créer une instance</a-->
-  <!--<a href="#createModal" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-button-icon-primary ui-icon ui-icon-plusthick" id="create-button" role="button" data-toggle="modal" title="Create an instance"></a> -->
-    <button  id="addButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
-        <span class="glyphicon glyphicon-plus"></span> ADD AN INSTANCE
-    </button>
-</p>
+<!-- Button call creation -->
+<button  id="addButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
+    <span class="glyphicon glyphicon-plus"></span>
+    ADD AN INSTANCE
+</button>
 
+<!-- The slickGrid List -->
+<div id="myGrid">
 
-<div id="myGrid" style="width:100%;height:300px;"></div>
+</div>
 
-
+<!-- Modal Creation -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="addModal">
         <div class="modal-content">
@@ -58,21 +53,20 @@
             <div class="modal-body">
 
                     <div class="input-group">
-                        <span class="input-group-addon" style="width: 150px;"> TITLE </span>
-                        <input id="title" type="text" class="form-control" placeholder="Instance title" aria-describedby="basic-addon1" style="width: 450px;" required >
+                        <span class="input-group-addon spansCreate"> TITLE </span>
+                        <input id="title" type="text" class="form-control inputsCreate" placeholder="Instance title" aria-describedby="basic-addon1" required >
                     </div>
 
                     <br/>
 
                     <div class="row hidden" id="techNameLabel">
-                        <label for="technicalName" class="span2" title="alphanumeric">Technical name
-                        </label>
+                        <label for="technicalName" class="span2" title="alphanumeric">Technical name</label>
                         <input class="span3" type="text" name="technicalName" id="technicalName" disabled required pattern="[a-z_0-9]+" placeholder="lowercase letters and digits" />
                     </div>
 
                     <div class="input-group" id="part1">
-                        <span class="input-group-addon"  style="width: 150px;">  PROJECT </span>
-                        <input type="text" class="form-control" title="lowercase alphanumeric"  pattern="[a-z_0-9]+" name="technicalName_part1" id="technicalName_part1" placeholder="Project Name" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <span class="input-group-addon spansCreate">  PROJECT </span>
+                        <input type="text" class="form-control inputsCreate" title="lowercase alphanumeric"  pattern="[a-z_0-9]+" name="technicalName_part1" id="technicalName_part1" placeholder="Project Name" aria-describedby="basic-addon1" required>
                         <div class="validMessage alert alert-danger" style="display:none">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Only lower case letters and digits
@@ -83,30 +77,32 @@
                     <br/>
 
                     <div class="input-group">
-                        <span class="input-group-addon" style="width: 150px;">  STUDY </span>
-                        <input id="technicalName_part2" type="text" class="form-control" title="lowercase alphanumeric" placeholder="Study Name"  pattern="[a-z_0-9]+" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <span class="input-group-addon spansCreate">  STUDY </span>
+                        <input id="technicalName_part2" type="text" class="form-control inputsCreate" title="lowercase alphanumeric" placeholder="Study Name"  pattern="[a-z_0-9]+" aria-describedby="basic-addon1" required>
                         <div class="validMessage alert alert-danger" style="display:none">Only lower case letters and digits</div>
                     </div>
 
                     <br/>
 
                     <div class="input-group">
-                        <span class="input-group-addon"  style="width: 150px;"> VERSION </span>
-                        <input id="technicalName_part3" type="text" class="form-control" title="numeric" min="0" placeholder="Instance Version" pattern="[0-9]+" aria-describedby="basic-addon1" style="width: 450px;" required>
+                        <span class="input-group-addon spansCreate"> VERSION </span>
+                        <input id="technicalName_part3" type="text" class="form-control inputsCreate" title="numeric" min="0" placeholder="Instance Version" pattern="[0-9]+" aria-describedby="basic-addon1" style="width: 450px;" required>
                         <div class="validMessage alert alert-danger" style="display:none">Only digits</div>
                     </div>
 
                     <br/>
 
                     <div class="input-group">
-                        <span class="input-group-addon"  style="width: 150px;"> APP </span>
-                        <select id="app" name="application" class="span3" style="width: 450px;" required>
+                        <span class="input-group-addon spansCreate"> APP </span>
+                        <select id="app" name="application" class="span3 inputsCreate" required>
                             <% for(var i=0; i<apps.length; i++) {%>
                             <option><%= apps[i] %></option>
                             <% } %>
                         </select>
                     </div>
 
+
+                    <!-- Maybe useless ? -->
                     <div class="row hidden" id="url">
                         <label for="accel" class="span2" title="Instance's external URL">
                             external URL</label>
@@ -130,6 +126,7 @@
                         <table class="span5" id="tblAppendGrid">
                         </table>
                     </div>
+                    <!-- End useless ? -->
 
 
             </div>
@@ -402,7 +399,16 @@ $(function () {
 
       $('#settings-save-button').click(function (e) {
         var id = editor.getName();
-        var newSettings = Object.merge(list[id], editor.get());
+        var newSettings = editor.get();
+        newSettings.id = list[id].id;
+        newSettings.collectionName = list[id].collectionName;
+        newSettings.data_path = list[id].data_path;
+        newSettings.date = list[id].date;
+        newSettings.port = list[id].port;
+        newSettings.users = list[id].users;
+        newSettings.connexionURI = list[id].connexionURI;
+        newSettings.turnoffAll = list[id].turnoffAll;
+        newSettings.app = list[id].app;
         var putting = $.ajax({
           url: '/instance/' + id,
           type: 'PUT',
