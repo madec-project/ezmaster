@@ -173,16 +173,18 @@ table#columns-table tr > td {
     width: 450px !important;
 }
 
-/* SETTINGS  */
+/* EDITOR  */
 
 
 #settingsEditor{
     background: none repeat scroll 0% 0% rgba(0, 1, 0, 0.8);
+    overflow-y: auto;
 }
 
 
 .jsoneditor{
     height: 500px !important;
+    text-align: left;
 }
 
 
@@ -198,6 +200,28 @@ table#columns-table tr > td {
 #mode-text-button{
     margin: 10px;
     font-size: 15px;
+}
+
+#editDivWarning{
+  display: none;
+  font-size: 18px;
+  background-image: none;
+}
+
+#messageEditWarning{
+    font-size: 13px;
+}
+
+
+.poweredBy{
+    display: none;
+}
+
+.ace_gutter-cell.ace_error{
+    background-image: none!important;
+    background: red !important;
+    color: #fff;
+    font-weight: bold;
 }
 
 /* DELETE */

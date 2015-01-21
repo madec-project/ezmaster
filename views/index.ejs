@@ -22,6 +22,7 @@
 <script type="text/javascript" src="/SlickGrid/plugins/slick.headerbuttons.js"></script>
 <script type="text/javascript" src="/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
 <script type="text/javascript" src="javascripts/jsoneditor.min.js"></script>
+<script type="text/javascript" src="javascripts/ace/ace.js"></script>
 <script type="text/javascript" src="javascripts/require.js"></script>
 
 <div class="jumbotron" id="h1Div">
@@ -29,18 +30,18 @@
 </div>
 
 
-<!-- Button call creation -->
+<!-- CREATION BUTTON -->
 <button  id="addButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createModal">
     <span class="glyphicon glyphicon-plus"></span>
     ADD AN INSTANCE
 </button>
 
-<!-- The slickGrid List -->
+<!-- SLICKGRID -->
 <div id="myGrid">
 
 </div>
 
-<!-- Modal Creation -->
+<!-- CREATION MODAL -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="addModal">
         <div class="modal-content">
@@ -142,7 +143,7 @@
 </div>
 
 
-<!-- Remove instance modal -->
+<!-- REMOVE MODAL -->
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -169,7 +170,7 @@
     </div>
 </div>
 
-<!-- JSON Editor -->
+<!-- EDITOR MODAL -->
 <div id="settingsEditor" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -182,6 +183,11 @@
                 <button id="mode-text-button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-retweet"></span> Text</button>
                 <button id="mode-tree-button" class="btn btn-default btn-lg" style="display:none"> <span class="glyphicon glyphicon-retweet"></span> Tree</button>
 
+                <div id="editDivWarning" class="alert alert-danger">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span>Error:</span>
+                    <div id="messageEditWarning"></div>
+                </div>
                 <div id="settingsEditorDiv"></div>
 
               </div>
@@ -355,10 +361,12 @@ $(function () {
         try {
           var e = editor.get();
           $('#settings-save-button').removeClass('disabled');
-          $('.toolbar>span').text('');
+          $('messageEditWarning').text('');
+          $('#editDivWarning').hide();
         }
         catch (e) {
-          $('.toolbar>span').text(e.message);
+          $('#messageEditWarning').text(e.message);
+          $('#editDivWarning').show();
           $('#settings-save-button').addClass('disabled');
         }
       };
@@ -420,7 +428,12 @@ $(function () {
           displayStatus(id, !newSettings.turnoffAll);
           list[id] = newSettings;
           normalClose();
-        })
+          $('#settingsEditor .modal-content').css('border' ,'4px solid green').delay(900).queue(function(next){
+              $('.slick-row').removeClass('highlighted');
+              $('#settingsEditor').modal('hide');
+              next();
+          });
+        });
         putting.fail(function (err) {
           console.error(err);
           var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
@@ -436,7 +449,7 @@ $(function () {
       });
 
       $('#mode-text-button').click(function (e) {
-        editor.setMode('text');
+        editor.setMode('code');
         $('#mode-text-button').hide();
         $('#mode-tree-button').show();
       });
