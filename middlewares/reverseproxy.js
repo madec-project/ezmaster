@@ -35,6 +35,11 @@ module.exports = function() {
 
         }
         else{
+            // see https://github.com/nodejitsu/node-http-proxy#proxying-websockets
+            /*proxy.on('upgrade', function (req, socket, head) {
+                proxy.ws(req, socket, head);
+            });*/
+
             //IF HEADER DOMAIN SEND
             if ( (req.headers['x-forwarded-server']) ) {
 
