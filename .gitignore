@@ -10,6 +10,9 @@ instances.json
 # Tmp dir content is not part of the code
 tmp/*
 
+# webstorm files
+.idea/*
+
 # pm2 files
 *-pm2.json
 ecosystem.json
