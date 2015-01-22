@@ -1,10 +1,12 @@
 /*jshint node:true, laxcomma:true */
 "use strict";
 
-var config             = require('../config');
-var getInstancesConfig = require('../lib/instances').getInstancesConfig;
-var http = require('http');
-var httpProxy = require('http-proxy');
+var config             = require('../config'),
+    getInstancesConfig = require('../lib/instances').getInstancesConfig,
+    http = require('http'),
+    httpProxy = require('http-proxy'),
+    domainProxy = process.env.domainProxy;
+
 
 
 /*
@@ -20,12 +22,12 @@ module.exports = function() {
             redirected  = false;
 
         // IF Reverse proxy used
-        if ((req.headers['x-forwarded-server']) && (req.headers['x-forwarded-server'] === 'termith.inist.fr')) {
+        if ( (domainProxy) && (req.headers['x-forwarded-server']) && (req.headers['x-forwarded-server'] === domainProxy ) ) {
 
             /// IF there is the name host (subdomain)
             if ((req.headers['x-forwarded-host'])) {
 
-                var subdomain = (req.headers['x-forwarded-host']).split('.termith.inist.fr'); // split subdomain
+                var subdomain = (req.headers['x-forwarded-host']).split('.'+ domainProxy); // split subdomain
                 //console.log(subdomain[0]);
 
                 // For each instances config
@@ -46,7 +48,7 @@ module.exports = function() {
                 });
 
                 if(!redirected){
-                    res.redirect('http://inist.fr');
+                    res.render('404' , { title: 'Not Found !', path: '/', userName: req.user });
                 }
 
             }
