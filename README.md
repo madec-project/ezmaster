@@ -108,6 +108,19 @@ To set the port that castor-admin will use, set the environment variable `PORT` 
 export PORT=3000
 ```
 
+### domainProxy
+
+`castor-admin` can behave like a proxy. To activate it, set the `domainProxỳ 
+environment variable to the domain of your proxy.
+
+```bash
+export domainProxy=domain.co
+```
+
+In this example, when a `real_example_0` instance exists, you can use 
+http://real_example_0.domain.co to access to your instance, and not only with 
+http://machine.intra.domain.co:port/
+
 ### Items per page
 
 To change the default value of the items number per page, set the environment variable `ITEMS_PER_PAGE` (in `.bashrc` or `.profile`). Default value: 30.
