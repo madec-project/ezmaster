@@ -24,8 +24,6 @@ module.exports = function() {
         // IF NO ENV VARIABLE PROXY
         if(!domainProxy){
 
-            console.log('Pas de variable');
-
             //IF HEADER DOMAIN SEND
             if ( (req.headers['x-forwarded-server']) ){
                 res.render('404' , { title: 'Not Found !', path: '/', userName: req.user });
