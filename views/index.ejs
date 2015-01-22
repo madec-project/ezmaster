@@ -105,7 +105,7 @@
                                     <span class="input-group-addon spansCreate"> APP </span>
                                     <select id="app" name="application" class="span3 inputsCreate" required>
                                         <% for(var i=0; i<apps.length; i++) {%>
-                                        <option><%= apps[i] %></option>
+                                        <option <%if (i == 0) { %> selected="selected" <% } %> ><%= apps[i] %></option>
                                         <% } %>
                                     </select>
                                 </div>

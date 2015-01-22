@@ -29,11 +29,13 @@ var getApps = function getApps(folder) {
     if((fs.statSync(folder+'/'+file).isDirectory())) {
       if(fs.existsSync(folder+'/'+file+'/cli')){
         if(fs.existsSync(folder+'/'+file+'/node_modules/')){
-          return file;
+          return file.toLowerCase();
         }
       }
     }
   });
+  apps =apps.sort().reverse();
+  console.log(apps);
   return apps;
 
 };
@@ -46,7 +48,7 @@ var apps = fs.existsSync(home + '/apps') ? home + '/apps' : null ;
 
 // If Apps folder existe
 if(apps){
-  apps = getApps(apps); // Get ONLY directories ( which contain cli ) in ~/apps
+    apps = getApps(apps); // Get ONLY directories ( which contain cli ) in ~/apps
 }
 
   if (!req.user) {
