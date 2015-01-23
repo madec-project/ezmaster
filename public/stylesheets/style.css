@@ -229,7 +229,7 @@ table#columns-table tr > td {
 
 
 .jsoneditor{
-    height: 500px !important;
+    height: 400px !important;
     text-align: left;
 }
 
@@ -249,13 +249,16 @@ table#columns-table tr > td {
 }
 
 #editDivWarning{
-  display: none;
-  font-size: 18px;
-  background-image: none;
+    opacity: 0;
+    font-size: 13px;
+    background-image: none;
+    padding: 0px !important;
+    height: 40px;
+    overflow: hidden;
 }
 
 #messageEditWarning{
-    font-size: 13px;
+    font-size: 12px;
 }
 
 

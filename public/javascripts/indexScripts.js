@@ -151,11 +151,11 @@ $(function () {
           var e = editor.get();
           $('#settings-save-button').removeClass('disabled');
           $('messageEditWarning').text('');
-          $('#editDivWarning').hide();
+          $('#editDivWarning').css('opacity' , '0');
         }
         catch (e) {
           $('#messageEditWarning').text(e.message);
-          $('#editDivWarning').show();
+          $('#editDivWarning').css('opacity' , '1');
           $('#settings-save-button').addClass('disabled');
         }
       };
