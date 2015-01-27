@@ -219,7 +219,7 @@ table#columns-table tr > td {
 
 
 #settingsEditor{
-    background: none repeat scroll 0% 0% rgba(0, 1, 0, 0.8);
+    background: none repeat scroll 0% 0% rgba(0, 1, 0, 0.6);
     overflow-y: auto;
 }
 
