@@ -204,6 +204,11 @@ table#columns-table tr > td {
     background-color: rgba(200, 250, 200, 50);
 }
 
+.slick-viewport{
+    height: auto !important;
+    overflow: hidden;
+}
+
 /* CREATE */
 
 .spansCreate{
