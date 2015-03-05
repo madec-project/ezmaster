@@ -4,7 +4,7 @@
   "description": "Administration for Castor apps",
   "main": "app.js",
   "bin": {
-    "castor-admin": "./bin/admin"i,
+    "castor-admin": "./bin/admin",
     "ezmaster": "./bin/admin"
   },
   "scripts": {
