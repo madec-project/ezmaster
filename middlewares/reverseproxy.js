@@ -5,7 +5,7 @@ var config             = require('../config'),
     getInstancesConfig = require('../lib/instances').getInstancesConfig,
     http = require('http'),
     httpProxy = require('http-proxy'),
-    domainProxy = process.env.domainProxy;
+    domainEnv = process.env.domainProxy;
 
 
 
@@ -15,80 +15,36 @@ var config             = require('../config'),
 
 module.exports = function() {
 
+    config.instances = getInstancesConfig();
+    var proxy       = httpProxy.createProxyServer({}),
+        redirected  = false,
+        reqServer,
+        reqHost,
+        reqSubdomain;
+
     return function(req, res , next) {
 
-        config.instances = getInstancesConfig();
-        var proxy       = httpProxy.createProxyServer({}),
-            redirected  = false;
+        reqServer = req.headers['x-forwarded-server'];
+        reqHost = req.headers['x-forwarded-host'];
+        reqSubdomain = reqHost ? reqHost.split('.') : null;
 
-        // IF NO ENV VARIABLE PROXY
-        if(!domainProxy){
-
-            //IF HEADER DOMAIN SEND
-            if ( (req.headers['x-forwarded-server']) ){
-                res.render('404' , { title: 'Not Found !', path: '/', userName: req.user });
+        if(reqSubdomain && (reqServer === domainEnv)){
+            for(var i in config.instances){
+                if ((config.instances[i].id) && (config.instances[i].id === reqSubdomain[0])) {
+                    redirected = true;
+                    var url = 'http://127.0.0.1:' + config.instances[i].port;
+                    proxy.web(req, res, { target: url });
+                    break;
+                }
             }
-            // ACCES ADMIN
-            else{
-                next();
+            if(!redirected) {
+                res.render('404', { title: 'No any app found :( !', path: '/', userName: req.user });
             }
-
         }
         else{
-            // see https://github.com/nodejitsu/node-http-proxy#proxying-websockets
-            /*proxy.on('upgrade', function (req, socket, head) {
-                proxy.ws(req, socket, head);
-            });*/
-
-            //IF HEADER DOMAIN SEND
-            if ( (req.headers['x-forwarded-server']) ) {
-
-                //IF HEADER DOMAIN = ENV PROXY
-                if (req.headers['x-forwarded-server'] === domainProxy ){
-
-                    /// IF there is the name host (subdomain)
-                    if ((req.headers['x-forwarded-host'])) {
-
-                        var subdomain = (req.headers['x-forwarded-host']).split('.'+ domainProxy); // split subdomain
-
-                        // For each instances config
-                        Object.keys(config.instances, function (key, value) {
-
-                            // If technicalname = subdomain
-                            if ((value.id) && (value.id == subdomain[0])) {
-
-                                var url = 'http://127.0.0.1:' + value.port;
-                                proxy.web(req, res, { target: url });
-
-                                redirected = true;
-
-                            }
-
-                        });
-
-                        //IF NO INSTANCES HAVE REDIRECTED
-                        if(!redirected){
-                            res.render('404' , { title: 'Not Found !', path: '/', userName: req.user });
-                        }
-
-                    }
-                }
-                //IF HEADER DOMAIN != ENV PROXY
-                else{
-                    res.render('404' , { title: 'Not Found !', path: '/', userName: req.user });
-                }
-
-            }
-            //IF HEADER DOMAIN NOT SEND
-            else{
-                next();
-            }
-
+            next();
         }
 
-
     };
-
-
 
 };
