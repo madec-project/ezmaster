@@ -1,6 +1,6 @@
 {
   "name": "ezmaster",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Administration for Castor apps",
   "main": "app.js",
   "bin": {
