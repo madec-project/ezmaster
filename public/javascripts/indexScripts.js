@@ -1,4 +1,10 @@
 $(function () {
+  var getTechnicalName = function getTechnicalName() {
+    var tcp1 = $('#technicalName_part1').val();
+    var tcp2 = $('#technicalName_part2').val();
+    var tcp3 = $('#technicalName_part3').val();
+    return tcp1+'_'+tcp2+ (tcp3.length?'_'+tcp3:'');
+  };
 
   // Initialize SlickGrid (instances list)
   var portFormatter =
@@ -408,6 +414,10 @@ $(function () {
         var tcp3 = $('#technicalName_part3').val();
         var alphanum = /^[a-z0-9]+$/;
         var numrik = /^[0-9]+$/;
+        var technicalName = getTechnicalName();
+        if (config.domain) {
+          $('#url').val('http://'+technicalName+'.'+config.domain);
+        }
         if ((tcp1.match(alphanum)) && (tcp2.match(alphanum)) && (tcp3.match(numrik))) {
           $('#create-submit-button').removeAttr('disabled');
         }
@@ -464,8 +474,8 @@ $(function () {
         })
         .error(function (jqXHR) {
           alert(
-            'Erreur : the data server returned an error (' 
-              + jqXHR.status + ' : ' + jqXHR.statusText + ')'
+            'Erreur : the data server returned an error (' +
+            jqXHR.status + ' : ' + jqXHR.statusText + ')'
           );
           console.error(jqXHR);
         });
@@ -474,8 +484,8 @@ $(function () {
     }
   }).error(function (jqXHR) {
     alert(
-      'Erreur : the data server returned an error ('
-        + jqXHR.status + ' : ' + jqXHR.statusText + ')'
+      'Erreur : the data server returned an error (' +
+      jqXHR.status + ' : ' + jqXHR.statusText + ')'
     );
     console.error(jqXHR);
   });
@@ -490,8 +500,7 @@ $(function () {
         title = $('#title').val(),
         app = $('#app').val(),
         //technicalName = $('#technicalName').val(),
-        technicalName = $('#technicalName_part1').val() + '_' + 
-          $('#technicalName_part2').val() + '_' + $('#technicalName_part3').val();
+        technicalName = getTechnicalName();
         accel = $('#accel').val();
         date = $('#date_input').val();
         users = null;
@@ -558,4 +567,8 @@ $(function () {
       alert(errText);
     });
   });
+
+  if (!config.domain) {
+    $('.input-group #url').parent().hide();
+  }
 });
