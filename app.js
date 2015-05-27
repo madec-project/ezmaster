@@ -65,7 +65,7 @@ app.configure(function () {
   });
   app.use(function errorNotFound(req, res, next) {
     res.statusCode = 404;
-    res.render('404', { title: 'Page Inconnue', path: '/', userName: req.user });
+    res.render('404', { title: 'Not found', path: '/', userName: req.user });
   });
 
 });
