@@ -35,6 +35,7 @@ $(function () {
     {id:"port", name:"Port", field:"port", sortable:true, formatter: portFormatter},
     {id:"technicalName", name:"Technical name", field:"technicalName", sortable:true},
     {id:"date", name:"Creation date", field:"date", sortable:true},
+    {id:"app", name:"App", field:"app", sortable:true},
     {id:"actions", name: "Actions", field: "actions", formatter: actionFormatter/*, width: 1*/}
   ];
 
@@ -62,20 +63,20 @@ $(function () {
   };
 
   function filter(item) {
+    function isInColumn(s) {
+      return String(item[column.field]).toUpperCase().indexOf(s.toUpperCase()) !== -1;
+    }
     for (var columnId in columnFilters) {
       if (columnId !== undefined && columnFilters[columnId] !== "") {
         var column = grid.getColumns()[grid.getColumnIndex(columnId)];
         var str = columnFilters[columnId];
         var tab = str.split(' ');
         if (item[column.field]) {
-          if (item[column.field] == "") {
+          if (item[column.field] === "") {
             return false;
           }
 
-          return tab.every(function isInColumn(s) {
-            return String(item[column.field]).toUpperCase().indexOf(s.toUpperCase()) !== -1;
-          })
-
+          return tab.every(isInColumn);
         }
       }
     }
@@ -103,8 +104,9 @@ $(function () {
           title: list[id].title,
           port: list[id].port,
           technicalName: id,
+          app: list[id].app,
           date: list[id].date || new Date()
-        }
+        };
       }
       dataView = new Slick.Data.DataView({ inlineFilters: false });
       dataView.setItems(data);
@@ -125,7 +127,7 @@ $(function () {
 
       $(grid.getHeaderRow()).delegate(":input", "change keyup", function (e) {
         var columnId = $(this).data("columnId");
-        if (columnId != null) {
+        if (columnId !== null) {
           columnFilters[columnId] = $.trim($(this).val());
           dataView.refresh();
         }
@@ -269,7 +271,7 @@ $(function () {
         }
         else {
           $('.status-toggle[data-id="' + id + '"][data-status="running"]').hide();
-          $('.status-toggle[data-id="' + id + '"][data-status="stopped"]').show(); 
+          $('.status-toggle[data-id="' + id + '"][data-status="stopped"]').show();
 
           $('.status[data-id="' + id + '"].icon-ok').hide();
           $('.status[data-id="' + id + '"].icon-remove').show();
@@ -279,7 +281,7 @@ $(function () {
       data.forEach(function (instance) {
         var id = instance.technicalName;
         displayStatus(id, !(list[id].turnoffAll));
-      })
+      });
 
       // Stop/start buttons and status
       var stop = function stop(e) {
@@ -295,7 +297,7 @@ $(function () {
         // Action done
         putting.done(function (data) {
           displayStatus(id, false);
-        })
+        });
         putting.fail(function (err) {
           console.error(err);
           var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
@@ -322,7 +324,7 @@ $(function () {
         // Action done
         putting.done(function (data) {
           displayStatus(id, true);
-        })
+        });
         putting.fail(function (err) {
           console.error(err);
           var errText = err.responseText.split("\n")[0] + ' (' + err.statusText +')';
@@ -424,7 +426,7 @@ $(function () {
             var sign = cols[i].sortAsc ? 1 : -1;
             var value1 = dataRow1[field], value2 = dataRow2[field];
             var result = (value1 === value2 ? 0 : ( value1 > value2 ? 1 : -1)) * sign;
-            if (result != 0) {
+            if (result !== 0) {
               return result;
             }
           }
