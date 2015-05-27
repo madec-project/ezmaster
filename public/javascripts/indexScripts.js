@@ -418,7 +418,7 @@ $(function () {
         if (config.domain) {
           $('#url').val('http://'+technicalName+'.'+config.domain);
         }
-        if ((tcp1.match(alphanum)) && (tcp2.match(alphanum)) && (tcp3.match(numrik))) {
+        if ((tcp1.match(alphanum)) && (tcp2.match(alphanum)) && (tcp3.match(numrik) || tcp3.length === 0)) {
           $('#create-submit-button').removeAttr('disabled');
         }
         else {
