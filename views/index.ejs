@@ -5,26 +5,10 @@
         <% include partials/head %>
 
         <!-- Stylesheet files -->
-        <link rel="stylesheet" href="/SlickGrid/slick.grid.css" type="text/css"/>
-        <link rel="stylesheet" href="/SlickGrid/controls/slick.pager.css" type="text/css"/>
-        <link rel="stylesheet" href="/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
-        <link rel="stylesheet" href="/SlickGrid/plugins/slick.headerbuttons.css" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="/stylesheets/jsoneditor.min.css">
 
         <!-- Javascript files -->
         <script type="text/javascript" src="/javascripts/sugar.min.js"></script>
-        <script type="text/javascript" src="/SlickGrid/lib/firebugx.js"></script>
-        <script type="text/javascript" src="/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.core.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.editors.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.formatters.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.groupitemmetadataprovider.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.dataview.js"></script>
-        <script type="text/javascript" src="/SlickGrid/controls/slick.pager.js"></script>
-        <script type="text/javascript" src="/SlickGrid/controls/slick.columnpicker.js"></script>
-        <script type="text/javascript" src="/SlickGrid/slick.grid.js"></script>
-        <script type="text/javascript" src="/SlickGrid/plugins/slick.headerbuttons.js"></script>
-        <script type="text/javascript" src="/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
         <script type="text/javascript" src="javascripts/jsoneditor.min.js"></script>
         <script type="text/javascript" src="javascripts/ace/ace.js"></script>
         <script type="text/javascript" src="javascripts/require.js"></script>
@@ -46,8 +30,21 @@
                 ADD AN INSTANCE
             </button>
 
-            <!-- SLICKGRID -->
-            <div id="myGrid"></div>
+            <table id="instances" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Port</th>
+                        <th>Technical name</th>
+                        <th>Creation date</th>
+                        <th>App</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
 
             <!-- CREATION MODAL -->
             <div id="createModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">

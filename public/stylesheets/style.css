@@ -122,11 +122,6 @@ table#columns-table tr > td {
     float: left;
 }
 
-#myGrid{
-    width:100%;
-    min-height:200px;
-}
-
 .validMessage{
     width: 100%;
     float: left;
@@ -144,40 +139,6 @@ table#columns-table tr > td {
     text-align: center;
 }
 
-.slick-header{
-    background: beige!important;
-    color: #444;
-    font-weight: bold;
-}
-
-.slick-headerrow-column{
-    background: none !important;
-}
-
-.slick-header-column.ui-state-default{
-    height: 30px !important;
-    line-height: 25px !important;
-}
-
-.slick-headerrow-column input{
-    height: 23px !important;
-    border: 1px solid #CCC;
-    border-radius: 4px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-}
-
-.slick-headerrow-column input:focus{
-    border-color:#66afe9;
-    outline:0;
-    -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
-}
-
-.slick-cell{
-    height: 30px !important;
-    line-height: 25px;
-}
 
 .r4{
     display: flex;
@@ -200,13 +161,8 @@ table#columns-table tr > td {
     color: red;
 }
 
-.highlighted div {
-    background-color: rgba(200, 250, 200, 50);
-}
-
-.slick-viewport{
-    height: auto !important;
-    overflow: hidden;
+.highlighted {
+    background-color: rgba(200, 250, 200, 50);    
 }
 
 /* CREATE */
