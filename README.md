@@ -30,7 +30,7 @@ Ex (for [ezvis, release 6.2.0](https://github.com/madec-project/ezvis/archive/v6
 $ cd ~/apps
 $ tar xvzf ezvis-6.2.0.tar.gz
 $ cd ezvis-6.2.0
-$ npm install
+$ npm install --production
 ```
 
 Make sure you install only apps (apps must include a `cli` file in their root directory).
