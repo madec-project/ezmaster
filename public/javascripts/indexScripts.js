@@ -3,7 +3,7 @@ $(function () {
     var tcp1 = $('#technicalName_part1').val();
     var tcp2 = $('#technicalName_part2').val();
     var tcp3 = $('#technicalName_part3').val();
-    return tcp1+'_'+tcp2+ (tcp3.length?'_'+tcp3:'');
+    return tcp1+'-'+tcp2+ (tcp3.length?'-'+tcp3:'');
   };
 
   var data = [];
