@@ -8,7 +8,7 @@ Prequired: nodejs (version 0.11.13+).
 
 ```bash
 $ npm install -g castor-clean
-$ npm install -g pm2
+$ npm install -g pm2@0.10
 $ npm install -g ezmaster
 ```
 
