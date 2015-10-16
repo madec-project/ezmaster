@@ -18,7 +18,7 @@ var home               = process.env.HOME;
  *
  * An app is a particular version of a castor theme, installed in a
  * folder possibly using some convention (themeName@version).
- * 
+ *
  * @param  {String} folder Path of the apps
  * @return {Array}         Name of apps (folders within folder)
  */
@@ -43,19 +43,18 @@ var getApps = function getApps(folder) {
 
 
 exports.index = function (req, res) {
-  // check if ~/apps folder exist
-var apps = fs.existsSync(home + '/apps') ? home + '/apps' : null ;
+  // check if ~/apps folder exists
+  var apps = fs.existsSync(home + '/apps') ? home + '/apps' : null ;
 
-// If Apps folder existe
-if(apps){
-    apps = getApps(apps); // Get ONLY directories ( which contain cli ) in ~/apps
-}
+  // If Apps folder exists
+  if(apps){
+      apps = getApps(apps); // Get ONLY directories (which contain cli) in ~/apps
+  }
 
   if (!req.user) {
     req.user =  "admin@castorjs.org";
   }
-  config.instances = getInstancesConfig();
-  config.processes = loadJson(getPM2JsonPath());
+  delete config.instances;
   res.render('index',
     { title: 'Accueil'
     , apps: apps
