@@ -52,5 +52,8 @@
   "peerDependencies": {
     "castor-clean": "*",
     "pm2": "*"
+  },
+  "engines": {
+    "node": ">=0.11"
   }
 }
