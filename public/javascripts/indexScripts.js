@@ -104,6 +104,7 @@ $(function () {
       // Instances settings are in var list.
       var settings = Object.clone(list[id]);
       delete settings.id;
+      delete settings.connectionURI;
       delete settings.collectionName;
       delete settings.data_path;
       delete settings.date;
@@ -122,6 +123,7 @@ $(function () {
       var id = editor.getName();
       var newSettings = editor.get();
       newSettings.id = list[id].id;
+      newSettings.connectionURI = list[id].connectionURI;
       newSettings.collectionName = list[id].collectionName;
       newSettings.data_path = list[id].data_path;
       newSettings.date = list[id].date;
