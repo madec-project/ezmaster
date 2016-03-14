@@ -77,7 +77,7 @@ module.exports = function() {
     }
     else {
       console.log('reverseproxy#1.0');
-      next(new Error('Invalid sub domain.'));
+      next();
     }
   }
 }
