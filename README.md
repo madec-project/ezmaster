@@ -76,15 +76,40 @@ export PORT=3000
 
 ### domainProxy
 
-`ezmaster` can behave like a proxy. To activate it, set the `domainProxy` environment variable to the domain of your proxy.
+`ezmaster` can behave like a reverse proxy. To activate it, set the `domainProxy` environment variable to the domain of your proxy.
 
 ```bash
 export domainProxy=domain.co
 ```
 
-In this example, when a `real_example_0` instance exists, you can use 
-http://real_example_0.domain.co to access to your instance, and not only with 
+In this example, when a `real-example-0` instance exists, you can use 
+http://real-example-0.domain.co to access to your instance, and not only with 
 http://machine.intra.domain.co:port/
+
+To simulate locally a request coming from an upcoming reverse proxy with curl (for debugging):
+```bash
+curl -H "Host: real-example-0.domain.co" \
+     -H "x-forwarded-server: domain.co" \
+     -H "x-forwarded-host: real-example-0.domain.co" \
+     --proxy "" http://127.0.0.1:35267/index.html
+```
+
+To configure an apache web server acting as an upcoming reverse proxy listening on the port 80 and forwarding to ezmaster on port 35267 (useful if ezmaster is hosted on a internal server not acessible directly from internet): 
+```apache
+<VirtualHost domain.co:80>
+  UseCanonicalName On
+  ProxyPreserveHost On
+
+  ServerName domain.co
+  ServerAlias *.domain.co
+
+  <Location />
+     ProxyPass        http://127.0.0.1:35267/
+     ProxyPassReverse http://127.0.0.1:35267/
+  </Location>
+</VirtualHost>
+
+```
 
 ### Items per page
 
@@ -135,14 +160,19 @@ To test, first make sure you have development dependencies installed:
 $ npm install -d
 ```
 
-Next, run the admin:
+Next, run the admin (the bin/admin script will be executed):
 
 ```bash
-$ ./bin/admin
+$ npm start
 ```
 
 Then, you can launch the tests:
 
 ```bash
 $ npm test
+```
+
+Tips: you can specify the environement variables directly before the ``npm start`` command. Ex:
+```bash
+DEBUG=* HOME=$(pwd)/data ITEMS_PER_PAGE=30 domainProxy=data.istex.fr npm start
 ```
