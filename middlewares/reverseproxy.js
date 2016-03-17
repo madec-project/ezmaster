@@ -67,7 +67,10 @@ module.exports = function() {
         var url = 'http://127.0.0.1:' + data[found].port;
         console.log('reverseproxy#1.1.1', url);
         proxy.web(req, res, { target: url });
-        proxy.on('error', function(e) { console.error("reverseproxy#1.1.2", e);  } );
+        proxy.on('error', function(e) { 
+          console.error("reverseproxy#1.1.2", e);  
+          next(new Error('Bad gateway'))
+        } );
         return;
       }
       else {
